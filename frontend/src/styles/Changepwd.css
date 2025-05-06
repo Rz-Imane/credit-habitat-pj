@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap');
+
+.pwd-wrapper {
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: -10px;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.pwd-card {
+    background-color: white;
+    width: 550px;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.new-code-title {
+    font-size: 18px;
+    font-weight: 450;
+    color: #003366;
+    margin-bottom: 50px;
+    text-align: center;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.pwd-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.pwd-form label {
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.pwd-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 10px;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.pwd-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.pwd-btn {
+    background-color: #00A5CF;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 10px;
+    font-weight: 300;
+    cursor: pointer;
+    font-family: 'Noto Sans', sans-serif;
+}

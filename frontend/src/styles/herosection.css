@@ -1,0 +1,197 @@
+* {
+  box-sizing: border-box;
+}
+
+.frame {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* Responsive card container */
+.card {
+  height: 100vh; 
+  width: 100vw;  
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  position: relative; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+
+}
+
+/* Container that holds both diagonal parts */
+.diagonal-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Left triangle pane */
+.left-pane {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #7db0b4, #b0ccc4);
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  z-index: 2;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* Right triangle pane */
+.right-pane {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  z-index: 1;
+  background-color: transparent;
+  overflow: hidden;
+}
+
+.chair-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Fixed position absolute container for content */
+.fixed-content-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Allow clicks to pass through */
+  z-index: 5;
+}
+
+/* Text & buttons content */
+.content {
+  max-width: 600px;
+  width: 60%;
+  text-align: left;
+  color: white;
+  padding: 5px;
+  position: absolute;
+  top: 15%;
+  left: 5%;
+  pointer-events: auto; /* Re-enable clicks */
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.headline {
+  margin-bottom: 15px;
+}
+
+.headline-text {
+  font-size: clamp(16px, 4vw, 22px);
+  font-weight: 700;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.buttons {
+  margin-top: 5%;
+  display: flex;
+  justify-content: flex-start;
+  gap: clamp(10px, 3vw, 20px);
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-size: clamp(14px, 3vw, 16px);
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+  padding: clamp(8px, 2vw, 12px) clamp(12px, 3vw, 20px);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.btn.white {
+  background-color: white;
+  color: black;
+}
+
+.btn.white:hover {
+  background-color: #f0f0f0;
+}
+
+.btn.blue {
+  background-color: #003d85;
+  color: white;
+}
+
+.btn.blue:hover {
+  background-color: #002b61;
+}
+
+/* Comprehensive responsive breakpoints */
+@media (max-width: 768px) {
+  .content {
+    left: 5%;
+    right: 5%;
+    width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .frame {
+    padding: 0 10px;
+  }
+
+  .content {
+    top: 8%;
+    padding: 10px;
+    text-align: left;
+  }
+
+  .headline-text {
+    line-height: 1.4;
+  }
+
+  .btn {
+    width: 100%;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 360px) {
+  .headline-text {
+    font-size: 14px;
+  }
+}
+
+@media (max-height: 400px) {
+  .content {
+    top: 3%;
+  }
+
+  .btn {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+}
+
+/* Ensure image scales nicely */
+.chair-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
