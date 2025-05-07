@@ -57,7 +57,7 @@ const MonProjet = ({ onBack, onNext }: MonProjetProps) => {
       <div className="form-section">
       <div className="form-group">
         <label>Montant du crédit demandé</label>
-        <input type="text" placeholder="Durée du crédit" />
+        <input type="text" placeholder="Montant du crédit" />
         <p className="small-text">Possibilité de modifier le montant</p>
       </div>
       </div>
