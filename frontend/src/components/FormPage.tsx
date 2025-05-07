@@ -21,7 +21,7 @@ const FormPage = () => {
       case 1:
         return <MaSituation onNext={nextStep} onBack={prevStep} />;
       case 2:
-        return <MonProjet onBack={prevStep} />;
+          return <MonProjet onBack={prevStep} onNext={nextStep} />;        
       case 3:
         return <PersonnaliserCredit onBack={prevStep} />;
       default:
@@ -46,6 +46,7 @@ const FormPage = () => {
 
         <form className="form-content">{renderStep()}</form>
       </main>
+
     </div>
   );
 };

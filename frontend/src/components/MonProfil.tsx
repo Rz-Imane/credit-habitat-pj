@@ -1,13 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/FormPage.css';
 
 type MonProfilProps = {
   onNext: () => void;
 };
+
 const MonProfil = ({ onNext }: MonProfilProps) => {
-    return (
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [showError, setShowError] = useState(false);
+
+  const handleTermsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAcceptedTerms(e.target.checked);
+    if (e.target.checked) {
+      setShowError(false);
+    }
+  };
+
+  const handleSubmit = () => {
+    if (!acceptedTerms) {
+      setShowError(true);
+      return;
+    }
+    onNext(); // Proceed only if terms are accepted
+  };
+
+  return (
     <>
-      <div className="form-section" >
+      <div className="form-section">
         <div className="form-group">
           <label>Civilité</label>
           <div className="radio-group">
@@ -60,8 +79,22 @@ const MonProfil = ({ onNext }: MonProfilProps) => {
       </div>
 
       <div className="terms">
-        <label><input type="checkbox" />J’ai lu et j’accepte les termes de conditions d’utilisation</label>
-        <label><input type="checkbox" />J’accepte de recevoir les offres professionnelles de BANK OF AFRICA</label>
+        <label>
+          <input
+            type="checkbox"
+            checked={acceptedTerms}
+            onChange={handleTermsChange}
+          />
+          J’ai lu et j’accepte les termes de conditions d’utilisation
+        </label>
+
+        <label>
+          <input type="checkbox" />J’accepte de recevoir les offres professionnelles de BANK OF AFRICA
+        </label>
+
+        {showError && (
+          <p className="error">You must accept the terms to continue.</p>
+        )}
       </div>
 
       <div className="form-section">
@@ -75,7 +108,7 @@ const MonProfil = ({ onNext }: MonProfilProps) => {
       </div>
 
       <div className="submit-section">
-        <button className="submit-btn" onClick={onNext}>Valider</button>
+        <button className="submit-btn" onClick={handleSubmit}>Valider</button>
       </div>
     </>
   );

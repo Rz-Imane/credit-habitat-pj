@@ -3,9 +3,10 @@ import '../styles/FormPage.css';
 
 type MonProjetProps = {
   onBack: () => void;
+  onNext: () => void;
 };
 
-const MonProjet = ({ onBack }: MonProjetProps) => {
+const MonProjet = ({ onBack, onNext }: MonProjetProps) => {
   return (
     <>
       <div className="form-section">
@@ -32,30 +33,38 @@ const MonProjet = ({ onBack }: MonProjetProps) => {
       </div>
 
       <div className="form-section">
+      <div className="form-group">
         <label>Durée du crédit</label>
         <div className="radio-group">
           <label><input type="radio" name="duree" /> En année</label>
           <label><input type="radio" name="duree" /> En mois</label>
         </div>
         <input type="text" placeholder="Durée du crédit" />
+        </div>
       </div>
 
+
       <div className="form-section">
+      <div className="form-group">
         <label>Quel type de taux souhaitez-vous ?</label>
         <div className="radio-group">
           <label><input type="radio" name="taux" /> Fixe</label>
           <label><input type="radio" name="taux" /> Variable</label>
         </div>
       </div>
+      </div>
 
       <div className="form-section">
-        <p>Montant du crédit demandé</p>
+      <div className="form-group">
+        <label>Montant du crédit demandé</label>
+        <input type="text" placeholder="Durée du crédit" />
         <p className="small-text">Possibilité de modifier le montant</p>
+      </div>
       </div>
 
       <div className="submit-section">
         <button className="back-btn" onClick={onBack}>Retour</button>
-        <button className="submit-btn">Valider</button>
+        <button className="submit-btn" onClick={onNext}>Valider</button>
       </div>
     </>
   );
