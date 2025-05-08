@@ -1,0 +1,102 @@
+/* Full-page background wrapper */
+.page-wrapper {
+  width: 100%; /* Use 100% for width instead of 100vw */
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden; /* Prevent horizontal overflow */
+}
+
+/* Your card styling remains the same */
+.credit__card {
+  width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  padding: 32px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* Other styles unchanged */
+.credit__card h2 {
+  font-size: 18px;
+  font-weight: 600;
+  text-align: left;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.credit__card p {
+  font-size: 14px;
+  text-align: left;
+  margin-bottom: 24px;
+  color: #555;
+}
+
+.credit-card__section {
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.credit-card__section-header {
+  font-size: 16px;
+  font-weight: 500;
+  color: #0084ff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.credit-card__section-header a {
+  font-size: 13px;
+  text-decoration: none;
+  color: #0084ff;
+  font-weight: 500;
+}
+
+/* General list styling */
+.credit-card__section-list {
+  list-style: none;
+  padding-left: 0;
+  font-size: 14px;
+  color: #444;
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* Horizontal container to display only two ul's per row */
+.credit-card__section-list.horizontal {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 items per row */
+  gap: 10px; /* Horizontal gap between the ul's */
+}
+
+/* Ensure that each ul is a block container stacking its items vertically */
+.credit-card__section-list.horizontal ul {
+  display: block; /* Stack li items vertically */
+}
+
+/* Align list items inside each ul */
+.credit-card__section-list.horizontal li {
+  display: block; /* Ensure li items are stacked vertically */
+  margin-bottom: 15px; /* Optional: Add space between list items */
+}
+
+/* Add this for any items that should have flexible alignment */
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

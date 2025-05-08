@@ -11,6 +11,8 @@ import Loginid from './components/Loginid'; // create or import this component
 import NewCode from './components/NewCode'; // create or import this component
 import Changepwd from './components/Changepwd'; // create or import this component
 import FormPage from './components/FormPage';
+import CreditSimulation from './components/CreditSimulation';
+import CreditConfirmationCard from './components/CreditConfirmationCard';
 
 function App() {
   return (
@@ -34,6 +36,8 @@ function App() {
         <Route path="/newcode" element={<NewCode />} />
         <Route path="/changepwd" element={<Changepwd />} />
         <Route path="/form" element={<FormPage />} />
+        <Route path="/simulation" element={<CreditSimulation/>} />
+        <Route path="/confirmation" element={<CreditConfirmationCard/>} />
       </Routes>
 
     </Router>
