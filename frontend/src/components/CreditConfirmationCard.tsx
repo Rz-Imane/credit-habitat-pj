@@ -81,7 +81,9 @@ const CreditConfirmationCard: React.FC = () => {
               <li>Assurance prévoyance</li>
             </ul>
         </div>
+        <button className="btn souscrire-btn">Souscrire à l’offre</button>
       </div>
+      
     </div>
   );
 };
