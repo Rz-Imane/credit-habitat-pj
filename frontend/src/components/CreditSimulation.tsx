@@ -1,11 +1,11 @@
 import React from 'react';
 import '../styles/CreditSimulation.css';
-import bgform from "../assets/bgform.png";
+import bg3 from "../assets/bg3.png";
 
 
 const CreditSimulation: React.FC = () => {
   return (
-    <div className="credit-simulation" style={{backgroundImage: `url(${bgform})`}}>
+    <div className="credit-simulation" style={{backgroundImage: `url(${bg3})`}}>
       <div className="credit-header">
         <p className="title">Félicitations !</p>
         <p className="subtitle">Votre prêt immobilier est pré-approuvé.</p>
@@ -36,7 +36,7 @@ const CreditSimulation: React.FC = () => {
             <p>Date de prélèvement de l’échéance :</p>
           </div>
 
-          <button className="btn secondary-btn">Refaire ma simulation</button>
+          <button className="btn simulation-btn">Refaire ma simulation</button>
         </div>
 
         {/* Right Card */}

@@ -6,23 +6,27 @@ import CreditOfferSection from './components/creditoffer';
 import Onlinecreditsteps from './components/OnlineCreditSteps';
 import FAQSection from './components/FAQSection';
 import MinimalFooter from './components/MinimalFooter';
-import LoginPage from './components/LoginPage'; // create or import this component
-import Loginid from './components/Loginid'; // create or import this component
-import NewCode from './components/NewCode'; // create or import this component
-import Changepwd from './components/Changepwd'; // create or import this component
+import LoginPage from './components/LoginPage'; 
+import Loginid from './components/Loginid'; 
+import NewCode from './components/NewCode'; 
+import Changepwd from './components/Changepwd'; 
 import FormPage from './components/FormPage';
 import CreditSimulation from './components/CreditSimulation';
 import CreditConfirmationCard from './components/CreditConfirmationCard';
+import SecondHeader from './components/SecondHeader';
+import ThirdHeader from './components/ThirdHeader';
+
 
 function App() {
   return (
     <Router>
-      <Header />
+  
       <Routes>
         <Route
           path="/"
           element={
             <>
+              <Header />
               <HeroSection />
               <CreditOfferSection />
               <Onlinecreditsteps />
@@ -31,13 +35,41 @@ function App() {
             </>
           }
         />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/loginid" element={<Loginid />} />
-        <Route path="/newcode" element={<NewCode />} />
-        <Route path="/changepwd" element={<Changepwd />} />
-        <Route path="/form" element={<FormPage />} />
-        <Route path="/simulation" element={<CreditSimulation/>} />
-        <Route path="/confirmation" element={<CreditConfirmationCard/>} />
+        <Route path="/login" element={
+          <>
+          <ThirdHeader /><LoginPage /> 
+          </>} />
+        <Route path="/loginid" element={
+          <>
+          <ThirdHeader />
+          <Loginid />
+          </>} 
+          />
+        <Route path="/newcode" element={
+          <>
+          <ThirdHeader /> 
+          <NewCode />
+          </>
+          } />
+        <Route path="/changepwd" element={
+          <>
+          <SecondHeader /> 
+          <Changepwd />
+          </>} />
+        <Route path="/form" element={
+          <>
+          <SecondHeader /> 
+          <FormPage />
+
+          </>
+        } />
+        <Route path="/simulation" element={
+          <>
+          <SecondHeader /> <CreditSimulation/> 
+          </>} />
+        <Route path="/confirmation" element={<>
+          <SecondHeader /> <CreditConfirmationCard/>
+          </>} />
       </Routes>
 
     </Router>

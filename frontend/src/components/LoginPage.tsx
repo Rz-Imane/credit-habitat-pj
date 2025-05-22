@@ -25,7 +25,7 @@ const LoginPage = () => {
             <input type="password" placeholder="Code d’accès" />
   
             <div className="login-bmce-buttons">
-              <button type="button" className="secondary-btn" onClick={() => navigate("/newcode")}>
+              <button type="button" className="secondary_btn" onClick={() => navigate("/newcode")}>
                 J’ai perdu mon code d’accès
               </button>
               <button type="submit" className="primary-btn">

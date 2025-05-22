@@ -8,18 +8,24 @@ html, body {
   box-sizing: border-box;
 }
 
+/* New wrapper for the entire page layout */
+.page-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .form-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 60px 20px;
-  min-height: 100vh;
+  flex: 1; /* This makes the form wrapper take up available space */
   background-size: cover;
   background-position: center;
   font-family: 'Segoe UI', sans-serif;
   box-sizing: border-box;
 }
-
 
 .form-container {
   background-color: white;
@@ -30,7 +36,6 @@ html, body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   margin: auto; 
 }
-
 
 .form-header {
   text-align: center;
@@ -170,7 +175,6 @@ html, body {
   background-color: #bbb;
 }
 
-
 .submit-btn {
   background-color: #003366;
   color: white;
@@ -213,10 +217,7 @@ html, body {
 }
 
 .terms .error {
-  color: #d9534f; /* Bootstrap danger red */
+  color: #d9534f;
   font-size: 12px;
   margin-top: 5px;
 }
-
-
-

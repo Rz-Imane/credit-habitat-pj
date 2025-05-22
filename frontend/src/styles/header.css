@@ -1,5 +1,5 @@
 .header {
-    position: relative; /* Use relative for normal flow, or fixed for sticky */
+    position: relative; 
     top: 0;
     left: 0;
     width: 100%;
@@ -35,13 +35,17 @@
   }
   
   .simulator-btn,
-  .request-btn {
+  .request-btn,
+  .disconnect-btn,
+  .demande-btn
+   {
     padding: 10px 15px;
     border-radius: 8px;
     border: none;
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
   }
+
   
   .simulator-btn {
     background-color: #00A5CF;
@@ -52,6 +56,17 @@
     background-color: #004080;
     color: white;
   }
+  
+  .disconnect-btn {
+    background-color: #00A5CF;
+    color: white;
+  }
+
+  .demande-btn {
+    background-color: #00A5CF;
+    color: white;
+  }
+
   .phone-icon {
     width: 16px;
     height: 16px;

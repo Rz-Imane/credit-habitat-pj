@@ -8,6 +8,7 @@ import bgform from "../assets/bgform.png";
 import '../styles/FormPage.css';
 
 
+
 const FormPage = () => {
   const [step, setStep] = useState(0);
 
@@ -21,7 +22,7 @@ const FormPage = () => {
       case 1:
         return <MaSituation onNext={nextStep} onBack={prevStep} />;
       case 2:
-          return <MonProjet onBack={prevStep} onNext={nextStep} />;        
+        return <MonProjet onBack={prevStep} onNext={nextStep} />;
       case 3:
         return <PersonnaliserCredit onBack={prevStep} />;
       default:
@@ -32,21 +33,20 @@ const FormPage = () => {
   const stepsLabels = ['Mon profil', 'Ma situation', 'Mon projet', 'Personnaliser mon crédit'];
 
   return (
-    <div 
-      className="form-wrapper" style={{backgroundImage: `url(${bgform})`}}
-    >
-      <main className="form-container">
-        <div className="step-indicator">
-          {stepsLabels.map((label, index) => (
-            <div key={index} className={`step ${step === index ? 'active' : ''}`}>
-              {label}
-            </div>
-          ))}
-        </div>
+    <div className="page-layout">
+      <div className="form-wrapper" style={{ backgroundImage: `url(${bgform})` }}>
+        <main className="form-container">
+          <div className="step-indicator">
+            {stepsLabels.map((label, index) => (
+              <div key={index} className={`step ${step === index ? 'active' : ''}`}>
+                {label}
+              </div>
+            ))}
+          </div>
 
-        <form className="form-content">{renderStep()}</form>
-      </main>
-
+          <form className="form-content">{renderStep()}</form>
+        </main>
+      </div>
     </div>
   );
 };
