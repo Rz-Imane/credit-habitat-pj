@@ -8,12 +8,14 @@
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 10px;
+
   }
   
   .steps-subtitle {
     color: #555;
     font-size: 16px;
     margin-bottom: 40px;
+    font-family: 'Poppins', sans-serif;
   }
   
   .steps-container {
@@ -40,6 +42,7 @@
     font-size: 16px;
     color: #0f7fb0;
     margin-bottom: 8px;
+    
   }
   
   .step-description {
