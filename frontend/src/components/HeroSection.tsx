@@ -29,7 +29,7 @@ const HeroSection = () => {
               </div>
                 <div className="buttons">
                   <button className="btn white">Simuler le crédit</button>
-                  <button className="btn blue" onClick={() => navigate("/login")}>Lancer ma demande</button>
+                  <button className="btn blue" onClick={() => navigate("/signup")}>Lancer ma demande</button>
                 </div>
               </div>
             </div>

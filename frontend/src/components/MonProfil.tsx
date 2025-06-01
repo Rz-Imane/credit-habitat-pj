@@ -8,6 +8,7 @@ type MonProfilProps = {
 const MonProfil = ({ onNext }: MonProfilProps) => {
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [showError, setShowError] = useState(false);
+  const [userType, setUserType] = useState('');
 
   const handleTermsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAcceptedTerms(e.target.checked);
@@ -17,11 +18,12 @@ const MonProfil = ({ onNext }: MonProfilProps) => {
   };
 
   const handleSubmit = () => {
-    if (!acceptedTerms) {
-      setShowError(true);
-      return;
-    }
-    onNext(); // Proceed only if terms are accepted
+    // Commenting out the necessity of accepting terms for now
+    // if (!acceptedTerms) {
+    //   setShowError(true);
+    //   return;
+    // }
+    onNext(); 
   };
 
   return (
@@ -71,11 +73,51 @@ const MonProfil = ({ onNext }: MonProfilProps) => {
         <div className="form-group">
           <label>Vous êtes ?</label>
           <div className="radio-group">
-            <label><input type="radio" name="type" />Particulier</label>
-            <label><input type="radio" name="type" />Marocain résident à l’étranger</label>
-            <label><input type="radio" name="type" />Professionnel</label>
+            <label>
+              <input
+                type="radio"
+                name="type"
+                value="Particulier"
+                onChange={(e) => setUserType(e.target.value)}
+              />
+              Particulier
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="type"
+                value="Marocain résident à l’étranger"
+                onChange={(e) => setUserType(e.target.value)}
+              />
+              Marocain résident à l’étranger
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="type"
+                value="Professionnel"
+                onChange={(e) => setUserType(e.target.value)}
+              />
+              Professionnel
+            </label>
           </div>
         </div>
+
+        {/* Champ pour MRE */}
+        {userType === 'Marocain résident à l’étranger' && (
+          <div className="form-group">
+            <label>Pays de résidence</label>
+            <input type="text" placeholder="Ex: France, Espagne, Canada..." />
+          </div>
+        )}
+
+        {/* Champ pour Professionnel */}
+        {userType === 'Professionnel' && (
+          <div className="form-group">
+            <label>Activité professionnelle</label>
+            <input type="text" placeholder="Ex: Médecin, Avocat, Artisan..." />
+          </div>
+        )}
       </div>
 
       <div className="terms">

@@ -5,6 +5,7 @@ import bgform from '../assets/bgform.png';
 const CreditConfirmationCard: React.FC = () => {
   return (
     <div className="page-wrapper" style={{ backgroundImage: `url(${bgform})` }}>
+        <div className="card-container">
       <div className="credit__card">
         <h2>Mon récapitulatif</h2>
         <p>Finalisez votre inscription en confirmant vos données</p>
@@ -81,9 +82,11 @@ const CreditConfirmationCard: React.FC = () => {
               <li>Assurance prévoyance</li>
             </ul>
         </div>
-        <button className="btn souscrire-btn">Souscrire à l’offre</button>
+        <button className="btn souscrire-btn">Je confirme</button>
       </div>
-      
+      <button className="btn refaire-btn">Refaire ma simulation</button>
+
+    </div>
     </div>
   );
 };

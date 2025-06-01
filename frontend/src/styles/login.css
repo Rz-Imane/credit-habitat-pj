@@ -98,3 +98,12 @@
     cursor: pointer;
     font-family: 'Noto Sans', sans-serif;
 }
+
+.new-code-title {
+    font-size: 18px;
+    font-weight: 450;
+    color: #003366;
+    margin-bottom: 50px;
+    text-align: center;
+    font-family: 'Noto Sans', sans-serif;
+}

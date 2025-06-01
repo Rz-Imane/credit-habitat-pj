@@ -1,14 +1,12 @@
 /* Full-page background wrapper */
 .page-wrapper {
-  width: 100%; /* Use 100% for width instead of 100vw */
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   display: flex;
   justify-content: center;
-  align-items: center;
-  overflow-x: hidden; /* Prevent horizontal overflow */
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 40px 20px;
+  background-size: cover;
+  background-position: center;
 }
 
 /* Your card styling remains the same */
@@ -105,8 +103,31 @@
   background-color: #003366;
   color: white;
   border: none;
-  padding: 10px 25px;
+  padding: 10px 15px;
+  font-size: 14px;
   font-weight: 600;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
+  width: auto;
+  display: block;          
+  margin: 0 auto; 
+  font-family: 'Poppins', sans-serif;         
+}
+
+.refaire-btn {
+  padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    background-color: #00A5CF;
+    color: white;
+    font-size: 14px;
+  font-weight: 600;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* ⬅️ centers both the card and button */
 }

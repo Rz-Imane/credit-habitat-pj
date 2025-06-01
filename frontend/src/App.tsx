@@ -15,6 +15,7 @@ import CreditSimulation from './components/CreditSimulation';
 import CreditConfirmationCard from './components/CreditConfirmationCard';
 import SecondHeader from './components/SecondHeader';
 import ThirdHeader from './components/ThirdHeader';
+import SignUp from './components/SignUp';
 
 
 function App() {
@@ -35,6 +36,10 @@ function App() {
             </>
           }
         />
+        <Route path="/signup" element={
+          <>
+          <ThirdHeader /><SignUp /> 
+          </>} />
         <Route path="/login" element={
           <>
           <ThirdHeader /><LoginPage /> 
