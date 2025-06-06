@@ -7,7 +7,6 @@ import svg2 from "../assets/checkmark.svg";
 const CreditOfferSection = () => {
   return (
     <section className="credit-offer-section">
-      {/* Top Offer Row */}
       <div className="offer-top">
         <h2>OFFRE EXCLUSIVE EN LIGNE</h2>
         <div className="offer-features">
@@ -38,7 +37,7 @@ const CreditOfferSection = () => {
         </div>
       </div>
 
-      {/* Bottom Options Row */}
+
       <div className="offer-options">
         <h3>
           Des options de modulation de votre crédit pour s’adapter à vos

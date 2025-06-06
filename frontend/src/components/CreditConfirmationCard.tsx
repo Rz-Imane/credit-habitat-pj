@@ -1,92 +1,106 @@
+// src/components/CreditConfirmationCard.tsx
 import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import '../styles/CreditConfirmationCard.css';
 import bgform from '../assets/bgform.png';
 
 const CreditConfirmationCard: React.FC = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const formData = location.state;
+
+  //si l’utilisateur arrive sans données, retourne au formulaire
+  React.useEffect(() => {
+    if (!formData) {
+      navigate('/form');
+    }
+  }, [formData, navigate]);
+
+  if (!formData) return null; // Empêche l’affichage si pas de données
+
   return (
     <div className="page-wrapper" style={{ backgroundImage: `url(${bgform})` }}>
-        <div className="card-container">
-      <div className="credit__card">
-        <h2>Mon récapitulatif</h2>
-        <p>Finalisez votre inscription en confirmant vos données</p>
+      <div className="card-container">
+        <div className="credit__card">
+          <h2>Mon récapitulatif</h2>
+          <p>Finalisez votre inscription en confirmant vos données</p>
 
-        <div className="credit-card__section">
-          <div className="credit-card__section-header">
-            Mon projet <a href="#">Modifier ma simulation</a>
-          </div>
-          <ul className="credit-card__section-list horizontal">
-            <ul>
-            <li>Valeur du bien immobilier</li>
-            <li>Durée du crédit</li>
-            </ul>
-            <ul>
-            <li>Montant du crédit demandé</li>
-            <li>Apport personnel</li>
-            </ul>
-            <ul>
-            <li>Type de taux</li>
-            </ul>
-          </ul>
-        </div>
-
-        <div className="credit-card__section">
-          <div className="credit-card__section-header">
-            Mon profil <a href="#">Modifier mon profil</a>
-          </div>
-          <ul className="credit-card__section-list horizontal">
-          <ul>
-            <li>Civilité</li>
-            <li>Nom / Prénom</li>
-            </ul>
-            <ul>
-            <li>Date de naissance</li>
-            <li>Téléphone</li>
-            </ul>
-            <ul>
-            <li>Client BANK OF AFRICA : Vous êtes ?</li>
-            <li>Crédit en co-emprunt</li>
-            </ul>
-          </ul>
-        </div>
-
-        <div className="credit-card__section">
-          <div className="credit-card__section-header">
-            Ma situation <a href="#">Modifier ma situation</a>
-          </div>
-          <ul className="credit-card__section-list horizontal">
-            <ul>
-              <li>Mon employeur?</li>
-              <li>Ancienneté dans l’emploi actuel</li>
-            </ul>
-            <ul>
-              <li>Etes-vous en période d’essai?</li>
-              <li>Revenu mensuel net</li>
-            </ul>
-            <ul>
-              <li>Mensualité des crédits en cours</li>
-              <li>Avez-vous des revenus complémentaires?</li>
-            </ul>
-          </ul>
-        </div>
-
-        <div className="credit-card__section">
-          <div className="credit-card__section-header">
-            Personnaliser mon crédit <a href="#">Modifier ma personnalisation</a>
-          </div>
-
+          <div className="credit-card__section">
+            <div className="credit-card__section-header">
+              Mon projet <a href="#" onClick={() => navigate('/form')}>Modifier ma simulation</a>
+            </div>
             <ul className="credit-card__section-list horizontal">
-               <ul>
-              <li>Différé de remboursement</li>
-              <li>Le jour du prélèvement</li>
+              <ul>
+                <li>Valeur du bien immobilier : {formData.valeur_du_bien}</li>
+                <li>Durée du crédit : {formData.duree}</li>
               </ul>
-              <li>Assurance prévoyance</li>
+              <ul>
+                <li>Montant du crédit demandé : {formData.montant}</li>
+                <li>Apport personnel : {formData.apportpersonnel}</li>
+              </ul>
+              <ul>
+                <li>Type de taux : {formData.taux}</li>
+              </ul>
             </ul>
-        </div>
-        <button className="btn souscrire-btn">Je confirme</button>
-      </div>
-      <button className="btn refaire-btn">Refaire ma simulation</button>
+          </div>
 
-    </div>
+          <div className="credit-card__section">
+            <div className="credit-card__section-header">
+              Mon profil <a href="#" onClick={() => navigate('/form')}>Modifier mon profil</a>
+            </div>
+            <ul className="credit-card__section-list horizontal">
+              <ul>
+                <li>Civilité: {formData.civilite}</li>
+                <li>Nom / Prénom : {formData.nom} {formData.prenom}</li>
+              </ul>
+              <ul>
+                <li>Date de naissance : {formData.date_naissance}</li>
+                <li>Téléphone : {formData.tel}</li>
+              </ul>
+              <ul>
+                <li>Client BANK OF AFRICA : {formData.isclient ? 'Oui' : 'Non'}</li>
+                <li>Vous êtes : {formData.categorie_client}</li>
+                <li>Crédit en co-emprunt : {formData.coemprunt ? 'Oui' : 'Non'}</li>
+              </ul>
+            </ul>
+          </div>
+
+          <div className="credit-card__section">
+            <div className="credit-card__section-header">
+              Ma situation <a href="#" onClick={() => navigate('/form')}>Modifier ma situation</a>
+            </div>
+            <ul className="credit-card__section-list horizontal">
+              <ul>
+                <li>Mon employeur : {formData.employeur}</li>
+                <li>Ancienneté dans l’emploi actuel : {formData.anciennete}</li>
+              </ul>
+              <ul>
+                <li>En période d’essai : {formData.trialperiod ? 'Oui' : 'Non'}</li>
+                <li>Revenu mensuel net : {formData.revenu}</li>
+              </ul>
+              <ul>
+                <li>Mensualité des crédits en cours : {formData.mensualite}</li>
+                <li>Revenus complémentaires : {formData.revenucompl ? 'Oui' : 'Non'}</li>
+              </ul>
+            </ul>
+          </div>
+
+          <div className="credit-card__section">
+            <div className="credit-card__section-header">
+              Personnaliser mon crédit <a href="#" onClick={() => navigate('/form')}>Modifier ma personnalisation</a>
+            </div>
+            <ul className="credit-card__section-list horizontal">
+              <ul>
+                <li>Différé de remboursement : {formData.remboursement ? 'Oui' : 'Non'}</li>
+                <li>Le jour du prélèvement : {formData.jourrelev}</li>
+              </ul>
+              <li>Assurance prévoyance : {formData.financement}</li>
+            </ul>
+          </div>
+          <button className="btn souscrire-btn">Je confirme</button>
+        </div>
+        <button className="btn refaire-btn" onClick={() => navigate('/form')}>Refaire ma simulation</button>
+      </div>
     </div>
   );
 };

@@ -10,15 +10,12 @@ const HeroSection = () => {
       <div className="frame">
         <div className="card">
           <div className="diagonal-container">
-            {/* Left Text Side */}
             <div className="left-pane"></div>
 
-            {/* Right Image Side */}
             <div className="right-pane">
               <img src={chair} alt="chair" className="chair-img" />
             </div>
             
-            {/* Fixed content wrapper - separated from left-pane */}
             <div className="fixed-content-wrapper">
               <div className="content">
               <div className="headline">

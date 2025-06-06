@@ -22,11 +22,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      accessCode: {                        // <--- NEW FIELD
+      accessCode: {                        
         type: Sequelize.STRING,
         allowNull: true,
       },
-      accessCodeExpiresAt: {               // <--- NEW FIELD
+      accessCodeExpiresAt: {               
         type: Sequelize.DATE,
         allowNull: true,
       },

@@ -1,30 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/FormPage.css';
 
 type MonProfilProps = {
+  data: any;
+  setData: (fn: (prev: any) => any) => void;
   onNext: () => void;
 };
 
-const MonProfil = ({ onNext }: MonProfilProps) => {
-  const [acceptedTerms, setAcceptedTerms] = useState(false);
+const MonProfil = ({ data, setData, onNext }: MonProfilProps) => {
+  const [local, setLocal] = useState({
+    civilite: data.civilite || '',  
+    prenom: data.prenom || '',
+    nom: data.nom || '',
+    date_naissance: data.date_naissance || '',
+    tel: data.tel || '',
+    isclient: data.isclient || false,
+    categorie_client: data.categorie_client || '',
+    coemprunt: data.coemprunt || false,
+    activite_professionnelle: data.activite_professionnelle || '',
+    pays_residence: data.pays_residence || ''
+  });
+
   const [showError, setShowError] = useState(false);
-  const [userType, setUserType] = useState('');
 
-  const handleTermsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAcceptedTerms(e.target.checked);
-    if (e.target.checked) {
-      setShowError(false);
-    }
-  };
+  // Sync vers parent à chaque changement
+  useEffect(() => {
+  setData(prev => ({ ...prev, ...local }));
+}, [local, setData]);
 
-  const handleSubmit = () => {
-    // Commenting out the necessity of accepting terms for now
-    // if (!acceptedTerms) {
-    //   setShowError(true);
-    //   return;
-    // }
-    onNext(); 
-  };
+
+  // Validation sur la date (YYYY-MM-DD)
+  const handleNext = () => {
+  console.log('Date saisie:', local.date_naissance);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(local.date_naissance)) {
+    alert('Veuillez saisir une date de naissance valide (YYYY-MM-DD)');
+    return;
+  }
+  onNext();
+};
+
 
   return (
     <>
@@ -32,32 +46,85 @@ const MonProfil = ({ onNext }: MonProfilProps) => {
         <div className="form-group">
           <label>Civilité</label>
           <div className="radio-group">
-            <label><input type="radio" name="civility" />M.</label>
-            <label><input type="radio" name="civility" />Mme</label>
-            <label><input type="radio" name="civility" />Mlle</label>
-          </div>
+          <label>
+            <input
+              type="radio"
+              name="civilite"
+              value="M."
+              checked={local.civilite === 'M.'}
+              onChange={() => setLocal({ ...local, civilite: 'M.' })}
+            />
+            M.
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="civilite"
+              value="Mme"
+              checked={local.civilite === 'Mme'}
+              onChange={() => setLocal({ ...local, civilite: 'Mme' })}
+            />
+            Mme
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="civilite"
+              value="Mlle"
+              checked={local.civilite === 'Mlle'}
+              onChange={() => setLocal({ ...local, civilite: 'Mlle' })}
+            />
+            Mlle
+          </label>
+        </div>
+
         </div>
       </div>
 
       <div className="form-section">
         <div className="form-group">
-          <label>Prénom</label>
-          <input type="text" placeholder="Text" />
+          <label>Prénom *</label>
+          <input
+            type="text"
+            name="prenom"
+            value={local.prenom}
+            onChange={e => setLocal({ ...local, prenom: e.target.value })}
+          />
         </div>
         <div className="form-group">
-          <label>Nom</label>
-          <input type="text" placeholder="Text" />
+          <label>Nom *</label>
+          <input
+            type="text"
+            name="nom"
+            value={local.nom}
+            onChange={e => setLocal({ ...local, nom: e.target.value })}
+          />
         </div>
       </div>
 
       <div className="form-section">
         <div className="form-group">
-          <label>Date de naissance</label>
-          <input type="date" />
+          <label>Date de naissance *</label>
+          <input
+            type="date"
+            name="date_naissance"
+            value={local.date_naissance}
+            onChange={e => setLocal({ ...local, date_naissance: e.target.value })}
+          />
+          {showError && (
+            <div style={{ color: "red", marginTop: 8 }}>
+              Veuillez saisir une date de naissance valide (YYYY-MM-DD)
+            </div>
+          )}
         </div>
         <div className="form-group">
-          <label>Téléphone</label>
-          <input type="tel" placeholder="+212 (__) ___ __ __" />
+          <label>Téléphone *</label>
+          <input
+            type="tel"
+            name="tel"
+            value={local.tel}
+            onChange={e => setLocal({ ...local, tel: e.target.value })}
+          />
         </div>
       </div>
 
@@ -65,77 +132,87 @@ const MonProfil = ({ onNext }: MonProfilProps) => {
         <div className="form-group">
           <label>Êtes-vous un client BANK OF AFRICA ?</label>
           <div className="radio-group">
-            <label><input type="radio" name="client" />Oui</label>
-            <label><input type="radio" name="client" />Non</label>
+            <label>
+              <input
+                type="radio"
+                name="isclient"
+                value="true"
+                checked={local.isclient === true}
+                onChange={() => setLocal({ ...local, isclient: true })}
+              />
+              Oui
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="isclient"
+                value="false"
+                checked={local.isclient === false}
+                onChange={() => setLocal({ ...local, isclient: false })}
+              />
+              Non
+            </label>
           </div>
         </div>
 
         <div className="form-group">
-          <label>Vous êtes ?</label>
+          <label>Vous êtes *</label>
           <div className="radio-group">
             <label>
               <input
                 type="radio"
-                name="type"
-                value="Particulier"
-                onChange={(e) => setUserType(e.target.value)}
+                name="categorie_client"
+                value="particulier"
+                checked={local.categorie_client === 'particulier'}
+                onChange={() => setLocal({ ...local, categorie_client: 'particulier' })}
               />
               Particulier
             </label>
             <label>
               <input
                 type="radio"
-                name="type"
-                value="Marocain résident à l’étranger"
-                onChange={(e) => setUserType(e.target.value)}
+                name="categorie_client"
+                value="mre"
+                checked={local.categorie_client === 'mre'}
+                onChange={() => setLocal({ ...local, categorie_client: 'mre' })}
               />
               Marocain résident à l’étranger
             </label>
             <label>
               <input
                 type="radio"
-                name="type"
-                value="Professionnel"
-                onChange={(e) => setUserType(e.target.value)}
+                name="categorie_client"
+                value="professionnel"
+                checked={local.categorie_client === 'professionnel'}
+                onChange={() => setLocal({ ...local, categorie_client: 'professionnel' })}
               />
               Professionnel
             </label>
           </div>
         </div>
 
-        {/* Champ pour MRE */}
-        {userType === 'Marocain résident à l’étranger' && (
+        {local.categorie_client === 'mre' && (
           <div className="form-group">
-            <label>Pays de résidence</label>
-            <input type="text" placeholder="Ex: France, Espagne, Canada..." />
+            <label>Pays de résidence *</label>
+            <input
+              type="text"
+              name="pays_residence"
+              value={local.pays_residence}
+              onChange={e => setLocal({ ...local, pays_residence: e.target.value })}
+            />
           </div>
         )}
 
-        {/* Champ pour Professionnel */}
-        {userType === 'Professionnel' && (
+        {local.categorie_client === 'professionnel' && (
           <div className="form-group">
-            <label>Activité professionnelle</label>
-            <input type="text" placeholder="Ex: Médecin, Avocat, Artisan..." />
+            <label>Activité professionnelle *</label>
+            <input
+              type="text"
+              name="activite_professionnelle"
+              value={local.activite_professionnelle}
+              onChange={e => setLocal({ ...local, activite_professionnelle: e.target.value })}
+            />
           </div>
-        )}
-      </div>
-
-      <div className="terms">
-        <label>
-          <input
-            type="checkbox"
-            checked={acceptedTerms}
-            onChange={handleTermsChange}
-          />
-          J’ai lu et j’accepte les termes de conditions d’utilisation
-        </label>
-
-        <label>
-          <input type="checkbox" />J’accepte de recevoir les offres professionnelles de BANK OF AFRICA
-        </label>
-
-        {showError && (
-          <p className="error">You must accept the terms to continue.</p>
         )}
       </div>
 
@@ -143,14 +220,38 @@ const MonProfil = ({ onNext }: MonProfilProps) => {
         <div className="form-group">
           <label>Souhaitez-vous souscrire à un crédit en co-emprunt ?</label>
           <div className="radio-group">
-            <label><input type="radio" name="co-loan" />Oui</label>
-            <label><input type="radio" name="co-loan" />Non</label>
+            <label>
+              <input
+                type="radio"
+                name="coemprunt"
+                value="true"
+                checked={local.coemprunt === true}
+                onChange={() => setLocal({ ...local, coemprunt: true })}
+              />
+              Oui
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="coemprunt"
+                value="false"
+                checked={local.coemprunt === false}
+                onChange={() => setLocal({ ...local, coemprunt: false })}
+              />
+              Non
+            </label>
           </div>
         </div>
       </div>
 
       <div className="submit-section">
-        <button className="submit-btn" onClick={handleSubmit}>Valider</button>
+        <button
+          type="button"
+          className="submit-btn"
+          onClick={handleNext}
+        >
+          Valider l’étape
+        </button>
       </div>
     </>
   );

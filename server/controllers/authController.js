@@ -1,10 +1,10 @@
-// server/controllers/authController.js
+'use strict';
 const db = require('../models');
 const Utilisateur = db.utilisateur;
 const nodemailer = require('nodemailer');
 const bcrypt = require('bcryptjs');
 
-// Create transporter ONCE at the top (reuse it!)
+//transporter 
 const transporter = nodemailer.createTransport({
     host: 'smtp.ethereal.email',
     port: 587,
@@ -41,7 +41,7 @@ exports.signup = async (req, res) => {
       text: `Votre code de vérification est : ${accessCode}`
     });
 
-    // ADD THIS LINE for the preview URL
+    //for the preview URL
     console.log('Preview URL: ' + nodemailer.getTestMessageUrl(info));
 
     res.json({ message: "Code envoyé par email" });

@@ -12,7 +12,6 @@ const CreditSimulation: React.FC = () => {
       </div>
 
       <div className="credit-cards">
-        {/* Left Card */}
         <div className="credit-card left-card">
           <h2 className="section-title">Votre mensualité TTC</h2>
           <p className="monthly-amount">------ Dhs / Mois</p>
@@ -39,7 +38,6 @@ const CreditSimulation: React.FC = () => {
           <button className="btn simulation-btn">Refaire ma simulation</button>
         </div>
 
-        {/* Right Card */}
         <div className="credit-card right-card">
           <h2 className="section-title">Frais de Notaire</h2>
 

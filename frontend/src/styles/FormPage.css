@@ -8,7 +8,6 @@ html, body {
   box-sizing: border-box;
 }
 
-/* New wrapper for the entire page layout */
 .page-layout {
   display: flex;
   flex-direction: column;
@@ -20,7 +19,7 @@ html, body {
   justify-content: center;
   align-items: center;
   padding: 60px 20px;
-  flex: 1; /* This makes the form wrapper take up available space */
+  flex: 1; 
   background-size: cover;
   background-position: center;
   font-family: 'Segoe UI', sans-serif;

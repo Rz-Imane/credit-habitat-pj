@@ -21,7 +21,6 @@
   
   .faq-item {
     cursor: pointer;
-    /*border-bottom: 1px solid #004080;*/
   }
   
   .faq-question {
@@ -55,7 +54,7 @@
   }
   
   .faq-item.active .faq-answer {
-    max-height: 200px; /* ajustable */
+    max-height: 200px; 
     opacity: 1;
     margin-top: 10px;
   }

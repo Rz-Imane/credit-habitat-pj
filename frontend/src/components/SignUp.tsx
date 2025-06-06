@@ -25,7 +25,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       setInfo("Code envoyé par email !");
       setTimeout(() => {
         navigate("/changepwd", { state: { email } });
-      }, 1000); // Redirect after a short message
+      }, 1000); // Redirect apres a short message
     } catch (err) {
   if (err instanceof Error) {
     setError(err.message);

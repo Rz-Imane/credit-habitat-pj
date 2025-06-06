@@ -28,7 +28,7 @@ module.exports = {
         type: Sequelize.BOOLEAN
       },
       categorie_client: {
-        type: Sequelize.ENUM('particulier', 'professionnel', 'mre') // ← adapte selon tes cas
+        type: Sequelize.ENUM('particulier', 'professionnel', 'mre') 
       },
       coemprunt: {
         type: Sequelize.BOOLEAN
@@ -52,7 +52,7 @@ module.exports = {
         type: Sequelize.BOOLEAN
       },
       typeprojet: {
-        type: Sequelize.ENUM('logement','construction','terrain','rachat') // ← adapte ici aussi
+        type: Sequelize.ENUM('logement','construction','terrain','rachat') 
       },
       valeur_du_bien: {
         type: Sequelize.INTEGER
@@ -64,7 +64,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       taux: {
-        type: Sequelize.ENUM('fixe', 'variable') // ← adapte selon tes types de taux
+        type: Sequelize.ENUM('fixe', 'variable') 
       },
       montant: {
         type: Sequelize.INTEGER
@@ -73,7 +73,7 @@ module.exports = {
         type: Sequelize.BOOLEAN
       },
       financement: {
-        type: Sequelize.ENUM('par crédit', 'par propres moyens') // ← adapte ici aussi
+        type: Sequelize.ENUM('par crédit', 'par propres moyens') 
       },
       jourrelev: {
         type: Sequelize.INTEGER
