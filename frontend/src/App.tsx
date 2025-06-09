@@ -16,6 +16,7 @@ import CreditConfirmationCard from './components/CreditConfirmationCard';
 import SecondHeader from './components/SecondHeader';
 import ThirdHeader from './components/ThirdHeader';
 import SignUp from './components/SignUp';
+import CreditStepper from './components/CreditStepper';
 
 
 function App() {
@@ -65,7 +66,7 @@ function App() {
           <>
           <SecondHeader /> 
           <FormPage />
-
+          
           </>
         } />
         <Route path="/simulation" element={
@@ -74,6 +75,10 @@ function App() {
           </>} />
         <Route path="/confirmation" element={<>
           <SecondHeader /> <CreditConfirmationCard/>
+          </>} />
+        
+        <Route path="/credit" element={<>
+          <SecondHeader /> <CreditStepper/> 
           </>} />
       </Routes>
 

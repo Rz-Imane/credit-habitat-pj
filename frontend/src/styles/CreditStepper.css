@@ -1,0 +1,231 @@
+body {
+  background: #e5edef; /* soft solid, no gradient */
+  min-height: 100vh;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+}
+
+.credit-stepper-container {
+  max-width: 900px;
+  margin: 50px auto;
+  background: white;
+  border-radius: 12px;
+  padding: 32px 28px 24px 28px;
+  box-shadow: 0 2px 18px 0 rgba(0,51,102,0.10);
+  position: relative;
+}
+
+.credit-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 18px;
+  color: #234b63;
+  letter-spacing: -0.5px;
+}
+
+.credit-stepper-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  padding: 0 8px;
+}
+
+.credit-stepper-step {
+  display: flex;
+  align-items: center;
+  z-index: 2;
+}
+
+.credit-stepper-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #e7ecf1;
+  color: #647a91;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: background 0.2s, color 0.2s;
+  border: 2px solid transparent;
+}
+.credit-stepper-circle.active {
+  background: #27639e;
+  color: #fff;
+  border: 2px solid #27639e;
+  /* No animation, just a color change */
+}
+
+.credit-stepper-label {
+  margin: 0 11px 0 7px;
+  font-size: 0.98rem;
+  color: #647a91;
+  font-weight: 500;
+}
+.credit-stepper-label.selected {
+  color: #27639e;
+  font-weight: 600;
+}
+
+.credit-stepper-bar {
+  width: 32px;
+  height: 3px;
+  background: #d6e3ef;
+  border-radius: 1.5px;
+}
+
+.credit-step-title {
+  font-size: 1.08rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #234b63;
+}
+
+.credit-input-file {
+  margin-bottom: 22px;
+  display: block;
+  background: #f5f8fa;
+  padding: 9px 10px;
+  border-radius: 7px;
+  border: 1px solid #d3e0e9;
+}
+
+.credit-btn-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.credit-btn {
+  background: #e7ecf1;
+  color: #234b63;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 22px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.17s, color 0.15s;
+  box-shadow: 0 1px 2px #e0e6ee33;
+}
+.credit-btn:hover:not(:disabled) {
+  background: #cbd8e1;
+}
+.credit-btn.primary {
+  background: #27639e;
+  color: #fff;
+}
+.credit-btn.primary:hover:not(:disabled) {
+  background: #1e527e;
+  color: #fff;
+}
+.credit-btn:disabled,
+.credit-btn.primary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.credit-medical-form {
+  margin-top: 10px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 1px 6px #d3e0e955;
+  padding: 18px 10px 9px 10px;
+}
+
+.credit-medical-table {
+  width: 100%;
+  border-spacing: 0 10px;
+  margin-bottom: 20px;
+}
+
+.credit-medical-table th,
+.credit-medical-table td {
+  text-align: left;
+  padding: 10px 10px 10px 0;
+  font-size: 0.97rem;
+}
+
+.credit-medical-table th {
+  color: #46719b;
+  font-weight: 600;
+  text-align: center;
+  border-bottom: 1px solid #e2e9f0;
+  padding-bottom: 7px;
+  background: none;
+}
+
+.credit-medical-table td {
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px #e3e8ee33;
+  vertical-align: middle;
+}
+
+/* Fix: vertical "Oui"/"Non" radio buttons */
+.radio-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: flex-start;
+}
+
+.credit-medical-table td label {
+  font-weight: 500;
+  color: #2d4760;
+  font-size: 0.97rem;
+  cursor: pointer;
+  user-select: none;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.credit-input-text {
+  display: block;
+  margin-top: 5px;
+  padding: 7px 10px;
+  border-radius: 7px;
+  border: 1px solid #d3e0e9;
+  font-size: 0.97rem;
+  width: 93%;
+  max-width: 330px;
+  background: #f9fafb;
+  box-shadow: 0 1px 2px #e3e8ee11;
+  transition: border 0.16s, box-shadow 0.15s;
+}
+.credit-input-text:focus {
+  border: 1px solid #27639e;
+  background: #fff;
+  box-shadow: 0 1.5px 5px #b5cdfa20;
+}
+
+@media (max-width: 900px) {
+  .credit-stepper-container {
+    padding: 10px 2vw 10px 2vw;
+    max-width: 100vw;
+  }
+}
+@media (max-width: 680px) {
+  .credit-title {
+    font-size: 1.1rem;
+  }
+  .credit-medical-table th,
+  .credit-medical-table td {
+    font-size: 0.92rem;
+    padding: 7px 3px 7px 0;
+  }
+  .credit-medical-table td label {
+    font-size: 0.94rem;
+  }
+  .credit-stepper-bar {
+    width: 14px;
+    height: 2px;
+  }
+  .credit-stepper-circle {
+    width: 20px;
+    height: 20px;
+    font-size: 0.9rem;
+  }
+}
