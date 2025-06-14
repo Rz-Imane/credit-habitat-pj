@@ -1,4 +1,3 @@
-'use client';
 import React, { useState, useEffect } from 'react';
 import MonProfil from '../components/MonProfil';
 import MaSituation from '../components/MaSituation';
@@ -8,8 +7,8 @@ import bgform from "../assets/bgform.png";
 import '../styles/FormPage.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-// Définir le type des données du formulaire
 type FormData = {
+  id?: number;
   civilite: string;
   prenom: string;
   nom: string;
@@ -65,100 +64,113 @@ const initialData: FormData = {
   pays_residence: '',
 };
 
+function cleanPayload(obj: any) {
+  const cleaned: any = {};
+  const intFields = [
+    "revenu", "mensualite", "valeur_du_bien", "apportpersonnel",
+    "duree", "montant", "jourrelev"
+  ];
+  const enumFields = [
+    "typeprojet", "taux", "financement", "categorie_client"
+  ];
+  for (const key in obj) {
+    if (
+      (intFields.includes(key) || enumFields.includes(key)) &&
+      (obj[key] === "" || obj[key] === undefined)
+    ) {
+      cleaned[key] = null;
+    } else {
+      cleaned[key] = obj[key];
+    }
+  }
+  return cleaned;
+}
+
 const FormPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Permet de revenir sur l’étape voulue avec les données
+  // Récupérer l'id sauvegardé (si l'utilisateur revient)
+  const savedId = localStorage.getItem('formulaireId');
   const [step, setStep] = useState<number>(location.state?.step ?? 0);
   const [formData, setFormData] = useState<FormData>(() => {
-    // Si on vient de la page de confirmation, récupérer les données
     if (location.state) {
       const { step: incomingStep, ...rest } = location.state;
-      return { ...initialData, ...rest };
+      return { ...initialData, ...rest, id: rest.id || savedId || undefined };
     }
+    if (savedId) return { ...initialData, id: Number(savedId) };
     return initialData;
   });
 
-  // Si l'utilisateur revient avec des données modifiées
   useEffect(() => {
     if (location.state) {
       const { step: incomingStep, ...rest } = location.state;
       setStep(typeof incomingStep === 'number' ? incomingStep : 0);
-      setFormData((prev: FormData) => ({ ...prev, ...rest }));
+      setFormData((prev) => ({ ...prev, ...rest }));
     }
-    // eslint-disable-next-line
   }, [location.state]);
 
-  const nextStep = () => setStep((prev: number) => prev + 1);
-  const prevStep = () => setStep((prev: number) => prev - 1);
+  // ==> SUPPRIMER CETTE FONCTION
+  // const saveStepToBackend = async (nextStep: number) => { ... }
+
+  // Navigation = juste changement de step, aucune sauvegarde !
+  const nextStep = () => setStep((prev) => prev + 1);
+  const prevStep = () => setStep((prev) => prev - 1);
 
   // Soumission finale
-  const handleFinalSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+const handleFinalSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  try {
+    const cleanedFormData = cleanPayload(formData);
 
-    try {
-      const response = await fetch('/api/formulaire', {
+    // Si id présent, update (PUT), sinon create (POST)
+    let response;
+    if (cleanedFormData.id) {
+      // Update = PUT et url avec l'id
+      response = await fetch(`/api/formulaire/${cleanedFormData.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(cleanedFormData),
+      });
+    } else {
+      // Création = POST sans id dans le payload
+      delete cleanedFormData.id;
+      response = await fetch('/api/formulaire', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(cleanedFormData),
       });
-      const data = await response.json();
-      if (response.ok) {
-        navigate('/confirmation', { state: formData });
-      } else {
-        alert('Erreur : ' + data.error);
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Erreur serveur lors de l'envoi du formulaire");
     }
-  };
+
+    const data = await response.json();
+    if (response.ok) {
+      // Nettoie le localStorage après soumission si tu veux repartir de zéro ensuite
+      localStorage.removeItem('formulaireId');
+      navigate('/confirmation', { state: formData });
+    } else {
+      alert('Erreur : ' + data.error);
+    }
+  } catch (err) {
+    alert("Erreur serveur lors de l'envoi du formulaire");
+  }
+};
+
+
 
   const stepsLabels = [
-    'Mon profil',
-    'Ma situation',
-    'Mon projet',
-    'Personnaliser mon crédit'
+    'Mon profil', 'Ma situation', 'Mon projet', 'Personnaliser mon crédit'
   ];
 
   const renderStep = () => {
     switch (step) {
       case 0:
-        return (
-          <MonProfil
-            data={formData}
-            setData={setFormData}
-            onNext={nextStep}
-          />
-        );
+        return <MonProfil data={formData} setData={setFormData} onNext={nextStep} />;
       case 1:
-        return (
-          <MaSituation
-            data={formData}
-            setData={setFormData}
-            onNext={nextStep}
-            onBack={prevStep}
-          />
-        );
+        return <MaSituation data={formData} setData={setFormData} onNext={nextStep} onBack={prevStep} />;
       case 2:
-        return (
-          <MonProjet
-            data={formData}
-            setData={setFormData}
-            onNext={nextStep}
-            onBack={prevStep}
-          />
-        );
+        return <MonProjet data={formData} setData={setFormData} onNext={nextStep} onBack={prevStep} />;
       case 3:
-        return (
-          <PersonnaliserCredit
-            data={formData}
-            setData={setFormData}
-            onBack={prevStep}
-            onSubmit={handleFinalSubmit}
-          />
-        );
+        return <PersonnaliserCredit data={formData} setData={setFormData} onBack={prevStep} onSubmit={handleFinalSubmit} />;
       default:
         return null;
     }
