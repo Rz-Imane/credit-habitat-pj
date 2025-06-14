@@ -9,7 +9,7 @@ const CreditConfirmationCard: React.FC = () => {
   const navigate = useNavigate();
   const formData = location.state;
 
-  //si l’utilisateur arrive sans données, retourne au formulaire
+  // Si l’utilisateur arrive sans données, retourne au formulaire
   React.useEffect(() => {
     if (!formData) {
       navigate('/form');
@@ -17,6 +17,11 @@ const CreditConfirmationCard: React.FC = () => {
   }, [formData, navigate]);
 
   if (!formData) return null; // Empêche l’affichage si pas de données
+
+  // Utilitaire pour naviguer directement à l’étape voulue du formulaire
+  const goToStep = (stepNumber: number) => {
+    navigate('/form', { state: { ...formData, step: stepNumber } });
+  };
 
   return (
     <div className="page-wrapper" style={{ backgroundImage: `url(${bgform})` }}>
@@ -27,7 +32,10 @@ const CreditConfirmationCard: React.FC = () => {
 
           <div className="credit-card__section">
             <div className="credit-card__section-header">
-              Mon projet <a href="#" onClick={() => navigate('/form')}>Modifier ma simulation</a>
+              Mon projet{' '}
+              <a href="#" onClick={e => { e.preventDefault(); goToStep(2); }}>
+                Modifier ma simulation
+              </a>
             </div>
             <ul className="credit-card__section-list horizontal">
               <ul>
@@ -46,7 +54,10 @@ const CreditConfirmationCard: React.FC = () => {
 
           <div className="credit-card__section">
             <div className="credit-card__section-header">
-              Mon profil <a href="#" onClick={() => navigate('/form')}>Modifier mon profil</a>
+              Mon profil{' '}
+              <a href="#" onClick={e => { e.preventDefault(); goToStep(0); }}>
+                Modifier mon profil
+              </a>
             </div>
             <ul className="credit-card__section-list horizontal">
               <ul>
@@ -67,7 +78,10 @@ const CreditConfirmationCard: React.FC = () => {
 
           <div className="credit-card__section">
             <div className="credit-card__section-header">
-              Ma situation <a href="#" onClick={() => navigate('/form')}>Modifier ma situation</a>
+              Ma situation{' '}
+              <a href="#" onClick={e => { e.preventDefault(); goToStep(1); }}>
+                Modifier ma situation
+              </a>
             </div>
             <ul className="credit-card__section-list horizontal">
               <ul>
@@ -87,7 +101,10 @@ const CreditConfirmationCard: React.FC = () => {
 
           <div className="credit-card__section">
             <div className="credit-card__section-header">
-              Personnaliser mon crédit <a href="#" onClick={() => navigate('/form')}>Modifier ma personnalisation</a>
+              Personnaliser mon crédit{' '}
+              <a href="#" onClick={e => { e.preventDefault(); goToStep(3); }}>
+                Modifier ma personnalisation
+              </a>
             </div>
             <ul className="credit-card__section-list horizontal">
               <ul>
@@ -99,7 +116,9 @@ const CreditConfirmationCard: React.FC = () => {
           </div>
           <button className="btn souscrire-btn">Je confirme</button>
         </div>
-        <button className="btn refaire-btn" onClick={() => navigate('/form')}>Refaire ma simulation</button>
+        <button className="btn refaire-btn" onClick={() => goToStep(0)}>
+          Refaire ma simulation
+        </button>
       </div>
     </div>
   );
