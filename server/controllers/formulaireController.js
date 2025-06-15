@@ -1,21 +1,28 @@
 const db = require('../models');
 const Formulaire = db.formulaire;
 
-// Création
+
 // POST /api/formulaire
 exports.create = async (req, res) => {
   try {
-    const { date_naissance } = req.body;
+    console.log('Payload reçu:', req.body);
+    const { date_naissance, utilisateur_id, ...rest } = req.body;
     if (!date_naissance || date_naissance === "Invalid date") {
       return res.status(400).json({ error: "Date de naissance obligatoire et valide au format YYYY-MM-DD" });
     }
-    const newForm = await Formulaire.create(req.body);
-    res.status(201).json(newForm); // renvoie l'objet avec son id
+    // On crée avec l’utilisateur associé
+    const newForm = await Formulaire.create({
+      date_naissance,
+      utilisateur_id, 
+      ...rest
+    });
+    res.status(201).json(newForm);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Erreur serveur", details: err.message });
   }
 };
+
 
 
 // PUT /api/formulaire/:id
@@ -29,6 +36,18 @@ exports.update = async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Erreur serveur", details: err.message });
+  }
+};
+
+
+exports.getByUser = async (req, res) => {
+  try {
+    const { utilisateur_id } = req.params;
+    const formulaire = await Formulaire.findOne({ where: { utilisateur_id } });
+    if (!formulaire) return res.status(404).json({ error: "Aucun formulaire trouvé" });
+    res.json(formulaire);
+  } catch (err) {
+    res.status(500).json({ error: "Erreur serveur" });
   }
 };
 

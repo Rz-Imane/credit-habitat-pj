@@ -86,11 +86,16 @@ function cleanPayload(obj: any) {
   return cleaned;
 }
 
+//Formate la date pour input type="date"
+function formatDate(dateStr: string | undefined): string {
+  if (!dateStr) return '';
+  return dateStr.slice(0, 10);
+}
+
 const FormPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Récupérer l'id sauvegardé (si l'utilisateur revient)
   const savedId = localStorage.getItem('formulaireId');
   const [step, setStep] = useState<number>(location.state?.step ?? 0);
   const [formData, setFormData] = useState<FormData>(() => {
@@ -102,6 +107,38 @@ const FormPage: React.FC = () => {
     return initialData;
   });
 
+  // Charger le formulaire depuis la base pour l'utilisateur connecté
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    console.log("useEffect - userId récupéré du localStorage :", userId);
+
+    if (userId) {
+      fetch(`/api/formulaire/utilisateur/${userId}`)
+        .then(res => {
+          console.log("GET formulaire par utilisateur - status :", res.status);
+          return res.ok ? res.json() : null;
+        })
+        .then(data => {
+          console.log("GET formulaire par utilisateur - data reçue :", data);
+          if (data) {
+            setFormData(prev => ({
+              ...prev,
+              ...data,
+              date_naissance: formatDate(data.date_naissance) 
+            }));
+            console.log(
+              "FormData après récupération + format date_naissance :",
+              { ...data, date_naissance: formatDate(data.date_naissance) }
+            );
+          }
+        })
+        .catch((e) => {
+          console.log("Erreur lors du fetch du formulaire utilisateur :", e);
+        });
+    }
+  }, []);
+
+  // Gérer navigation  
   useEffect(() => {
     if (location.state) {
       const { step: incomingStep, ...rest } = location.state;
@@ -110,52 +147,61 @@ const FormPage: React.FC = () => {
     }
   }, [location.state]);
 
-  // ==> SUPPRIMER CETTE FONCTION
-  // const saveStepToBackend = async (nextStep: number) => { ... }
-
-  // Navigation = juste changement de step, aucune sauvegarde !
   const nextStep = () => setStep((prev) => prev + 1);
   const prevStep = () => setStep((prev) => prev - 1);
 
   // Soumission finale
-const handleFinalSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  try {
-    const cleanedFormData = cleanPayload(formData);
+  const handleFinalSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const cleanedFormData = cleanPayload(formData);
 
-    // Si id présent, update (PUT), sinon create (POST)
-    let response;
-    if (cleanedFormData.id) {
-      // Update = PUT et url avec l'id
-      response = await fetch(`/api/formulaire/${cleanedFormData.id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(cleanedFormData),
-      });
-    } else {
-      // Création = POST sans id dans le payload
-      delete cleanedFormData.id;
-      response = await fetch('/api/formulaire', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(cleanedFormData),
-      });
+      const userId = localStorage.getItem("userId");
+      console.log("handleFinalSubmit - userId récupéré :", userId);
+
+      const payload = {
+        ...cleanedFormData,
+        utilisateur_id: userId
+      };
+
+      console.log("handleFinalSubmit - payload envoyé au backend :", payload);
+
+      // On ne met pas l'id si création
+      if (!payload.id) delete payload.id;
+
+      let response;
+      if (payload.id) {
+        // Update
+        console.log("handleFinalSubmit - requête PUT à :", `/api/formulaire/${payload.id}`);
+        response = await fetch(`/api/formulaire/${payload.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+      } else {
+        // Création
+        console.log("handleFinalSubmit - requête POST à : /api/formulaire");
+        response = await fetch('/api/formulaire', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+      }
+
+      const data = await response.json();
+      console.log("handleFinalSubmit - réponse backend :", data);
+
+      if (response.ok) {
+        localStorage.removeItem('formulaireId');
+        navigate('/confirmation', { state: formData });
+      } else {
+        alert('Erreur : ' + data.error);
+      }
+    } catch (err) {
+      console.error("Erreur serveur lors de l'envoi du formulaire", err);
+      alert("Erreur serveur lors de l'envoi du formulaire");
     }
-
-    const data = await response.json();
-    if (response.ok) {
-      // Nettoie le localStorage après soumission si tu veux repartir de zéro ensuite
-      localStorage.removeItem('formulaireId');
-      navigate('/confirmation', { state: formData });
-    } else {
-      alert('Erreur : ' + data.error);
-    }
-  } catch (err) {
-    alert("Erreur serveur lors de l'envoi du formulaire");
-  }
-};
-
-
+  };
 
   const stepsLabels = [
     'Mon profil', 'Ma situation', 'Mon projet', 'Personnaliser mon crédit'

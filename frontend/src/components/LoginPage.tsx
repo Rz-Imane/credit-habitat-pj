@@ -11,25 +11,33 @@ const LoginPage = () => {
   const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setError("");
-    try {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }) 
-      });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error || "Erreur de connexion");
-      navigate("/form");
-    } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError("Une erreur s'est produite");
-      }
+  e.preventDefault();
+  setError("");
+  try {
+    const response = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }) 
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || "Erreur de connexion");
+    
+    
+    if (data.user && data.user.id) {
+      localStorage.setItem('userId', data.user.id);
     }
-  };
+    
+
+    navigate("/form");
+  } catch (err) {
+    if (err instanceof Error) {
+      setError(err.message);
+    } else {
+      setError("Une erreur s'est produite");
+    }
+  }
+};
+
 
   return (
     <>

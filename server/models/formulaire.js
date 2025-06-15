@@ -27,7 +27,12 @@ module.exports = (sequelize, DataTypes) => {
       financement: DataTypes.ENUM('par crédit', 'par propres moyens'),
       jourrelev: DataTypes.INTEGER,
       activite_professionnelle: DataTypes.STRING,
-      pays_residence: DataTypes.STRING
+      pays_residence: DataTypes.STRING,
+      utilisateur_id: {
+      type: DataTypes.STRING,
+      references: { model: 'utilisateurs', key: 'id' }
+      },
+
     },
     {
       tableName: 'formulaires',

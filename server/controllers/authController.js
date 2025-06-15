@@ -81,16 +81,20 @@ exports.changePassword = async (req, res) => {
 
 exports.login = async (req, res) => {
   try {
-    const { email, password } = req.body;  // <-- receive password
+    const { email, password } = req.body;
     const user = await Utilisateur.findOne({ where: { mail: email } });
     if (!user) {
       return res.status(400).json({ error: "Email ou mot de passe incorrect" });
     }
-    const valid = await bcrypt.compare(password, user.password);  // <-- compare with bcrypt
+    const valid = await bcrypt.compare(password, user.password);
     if (!valid) {
       return res.status(400).json({ error: "Email ou mot de passe incorrect" });
     }
-    res.json({ message: "Connexion réussie" });
+    // On renvoie aussi l'id ici 
+    res.json({ 
+      message: "Connexion réussie", 
+      user: { id: user.id, mail: user.mail }
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Erreur serveur" });
