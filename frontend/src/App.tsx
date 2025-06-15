@@ -17,6 +17,7 @@ import SecondHeader from './components/SecondHeader';
 import ThirdHeader from './components/ThirdHeader';
 import SignUp from './components/SignUp';
 import CreditStepper from './components/CreditStepper';
+import CreditSimulator from './components/CreditSimulator';
 
 
 function App() {
@@ -79,6 +80,10 @@ function App() {
         
         <Route path="/credit" element={<>
           <SecondHeader /> <CreditStepper/> 
+          </>} />
+
+        <Route path="/simulateur" element={<>
+          <SecondHeader /> <CreditSimulator/> <MinimalFooter />
           </>} />
       </Routes>
 

@@ -1,0 +1,217 @@
+:root {
+  --main-blue: #007be8;
+  --light-blue: #f1f8ff;
+  --green: #2ecc71;
+  --gray: #444;
+  --soft-gray: #f7f7f7;
+  --radius: 10px;
+  --blue: #003d85;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins',  sans-serif;
+  background-color: var(--soft-gray);
+}
+
+.simulator-wrapper {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 30px 25px;
+  background-color: #fff;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+h2 {
+  text-align: center;
+  color: var(--blue);
+  font-size: 1.4rem;
+  margin-bottom: 25px;
+}
+
+.input-group {
+  margin-bottom: 25px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--gray);
+}
+
+.input-group input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+input[type="range"] {
+  width: 100%;
+  appearance: none;
+  height: 6px;
+  background: #ddd;
+  border-radius: 5px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  height: 16px;
+  width: 16px;
+  background: var(--main-blue);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.simulate-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--green);
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.simulate-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #d63031;
+  background-color: #ffeaea;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.results {
+  margin-top: 35px;
+  padding: 25px 20px;
+  background-color: var(--light-blue);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.results h3 {
+  color: var(--blue);
+  margin-bottom: 12px;
+  font-size: 1.2rem;
+}
+
+.monthly {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: black;
+  margin: 10px 0;
+}
+
+.small-text {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+.customize-btn {
+  background-color: var(--blue);
+  color: white;
+  padding: 10px;
+  font-weight: 500;
+  font-size: 1rem;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 25px;
+  transition: background-color 0.2s ease;
+}
+
+.customize-btn:hover {
+  background-color: var(--blue);
+}
+
+.summary p {
+  margin: 6px 0;
+  font-size: 1rem;
+  color: var(--gray);
+}
+
+.summary strong {
+  display: inline-block;
+  margin-left: 6px;
+  color: black;
+}
+
+/* Supprimer les flèches des inputs number */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+/* Champ avec unité à droite */
+.input-with-unit {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-with-unit input {
+  padding-right: 60px;
+  width: 100%;
+}
+
+.input-with-unit .unit {
+  position: absolute;
+  right: 12px;
+  color: #555;
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+
+
+
+/* Style général propre */
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.simulator-bg {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.simulator-wrapper {
+  background-color: #ffffff;
+  padding: 30px 25px;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
