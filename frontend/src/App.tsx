@@ -18,6 +18,7 @@ import ThirdHeader from './components/ThirdHeader';
 import SignUp from './components/SignUp';
 import CreditStepper from './components/CreditStepper';
 import CreditSimulator from './components/CreditSimulator';
+import Chatbot from './components/Chatbot';
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
               <Onlinecreditsteps />
               <FAQSection />
               <MinimalFooter />
+              <Chatbot />
             </>
           }
         />
