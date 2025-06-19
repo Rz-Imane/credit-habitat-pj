@@ -18,10 +18,29 @@ const MonProjet = ({ data, setData, onNext, onBack }: MonProjetProps) => {
     montant: data.montant || ''
   });
 
-  useEffect(() => {
-  setData(prev => ({ ...prev, ...local }));
-}, [local, setData]);
+  const [touched, setTouched] = useState(false);
 
+  useEffect(() => {
+    setData(prev => ({ ...prev, ...local }));
+  }, [local, setData]);
+
+  // Détection des champs requis vides
+  const errors = {
+    typeprojet: !local.typeprojet,
+    valeur_du_bien: !local.valeur_du_bien,
+    apportpersonnel: !local.apportpersonnel,
+    duree: !local.duree,
+    taux: !local.taux,
+    montant: !local.montant,
+  };
+  const hasError = Object.values(errors).some(Boolean);
+
+  const handleNext = () => {
+    setTouched(true);
+    if (!hasError) {
+      onNext();
+    }
+  };
 
   return (
     <>
@@ -70,6 +89,7 @@ const MonProjet = ({ data, setData, onNext, onBack }: MonProjetProps) => {
               Rachat crédit immobilier
             </label>
           </div>
+          {touched && errors.typeprojet && <div className="warning-msg">Ce champ est requis.</div>}
         </div>
       </div>
 
@@ -82,6 +102,7 @@ const MonProjet = ({ data, setData, onNext, onBack }: MonProjetProps) => {
             value={local.valeur_du_bien}
             onChange={(e) => setLocal({ ...local, valeur_du_bien: e.target.value })}
           />
+          {touched && errors.valeur_du_bien && <div className="warning-msg">Ce champ est requis.</div>}
         </div>
         <div className="form-group">
           <label>Apport personnel (MAD)</label>
@@ -91,6 +112,7 @@ const MonProjet = ({ data, setData, onNext, onBack }: MonProjetProps) => {
             value={local.apportpersonnel}
             onChange={(e) => setLocal({ ...local, apportpersonnel: e.target.value })}
           />
+          {touched && errors.valeur_du_bien && <div className="warning-msg">Ce champ est requis.</div>}
         </div>
       </div>
 
@@ -103,6 +125,7 @@ const MonProjet = ({ data, setData, onNext, onBack }: MonProjetProps) => {
             value={local.duree}
             onChange={(e) => setLocal({ ...local, duree: e.target.value })}
           />
+          {touched && errors.duree && <div className="warning-msg">Ce champ est requis.</div>}
         </div>
       </div>
 
@@ -131,6 +154,7 @@ const MonProjet = ({ data, setData, onNext, onBack }: MonProjetProps) => {
               Variable
             </label>
           </div>
+          {touched && errors.taux && <div className="warning-msg">Ce champ est requis.</div>}
         </div>
       </div>
 
@@ -143,6 +167,7 @@ const MonProjet = ({ data, setData, onNext, onBack }: MonProjetProps) => {
             value={local.montant}
             onChange={(e) => setLocal({ ...local, montant: e.target.value })}
           />
+          {touched && errors.montant && <div className="warning-msg">Ce champ est requis.</div>}
         </div>
       </div>
 
@@ -150,10 +175,19 @@ const MonProjet = ({ data, setData, onNext, onBack }: MonProjetProps) => {
         <button type="button" className="back-btn" onClick={onBack}>
           Retour
         </button>
-        <button type="button" className="submit-btn" onClick={onNext}>
+        <button type="button" className="submit-btn" onClick={handleNext}>
           Valider l’étape
         </button>
       </div>
+
+      {/* Style warning rapide */}
+      <style>{`
+        .warning-msg {
+          color: #c40f0f;
+          font-size: 13px;
+          margin-top: 3px;
+        }
+      `}</style>
     </>
   );
 };

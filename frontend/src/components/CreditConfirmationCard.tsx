@@ -114,7 +114,7 @@ const CreditConfirmationCard: React.FC = () => {
               <li>Assurance prévoyance : {formData.financement}</li>
             </ul>
           </div>
-          <button className="btn souscrire-btn">Je confirme</button>
+          <button className="btn souscrire-btn" onClick={() => navigate('/simulation', { state: formData })}>Je confirme</button>
         </div>
         <button className="btn refaire-btn" onClick={() => goToStep(0)}>
           Refaire ma simulation

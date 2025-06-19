@@ -19,6 +19,7 @@ import SignUp from './components/SignUp';
 import CreditStepper from './components/CreditStepper';
 import CreditSimulator from './components/CreditSimulator';
 import Chatbot from './components/Chatbot';
+import MerciPage from './components/MerciPage';
 
 
 function App() {
@@ -86,6 +87,10 @@ function App() {
 
         <Route path="/simulateur" element={<>
           <SecondHeader /> <CreditSimulator/> <MinimalFooter />
+          </>} />
+
+          <Route path="/merci" element={<>
+          <SecondHeader /> <MerciPage/> 
           </>} />
       </Routes>
 

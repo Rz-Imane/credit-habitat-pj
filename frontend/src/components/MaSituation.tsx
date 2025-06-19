@@ -14,14 +14,37 @@ const MaSituation = ({ data, setData, onNext, onBack }: MaSituationProps) => {
     revenu: data.revenu || '',
     mensualite: data.mensualite || '',
     anciennete: data.anciennete || '',
-    trialperiod: data.trialperiod || false,
-    revenucompl: data.revenucompl || false
+    trialperiod: typeof data.trialperiod === "boolean" ? data.trialperiod : false,
+    revenucompl: typeof data.revenucompl === "boolean" ? data.revenucompl : false,
   });
+  const [touched, setTouched] = useState(false);
 
+  // Met à jour le parent à chaque modif locale
   useEffect(() => {
-  setData(prev => ({ ...prev, ...local }));
-}, [local, setData]);
+    setData(prev => ({ ...prev, ...local }));
+  }, [local, setData]);
 
+  // Validation des champs obligatoires
+  const errors = {
+    employeur: !local.employeur,
+    revenu: !local.revenu,
+    mensualite: !local.mensualite,
+    anciennete: !local.anciennete,
+    trialperiod: typeof local.trialperiod !== "boolean",
+    revenucompl: typeof local.revenucompl !== "boolean",
+  };
+  const hasError = Object.values(errors).some(Boolean);
+
+  const handleNext = () => {
+    setTouched(true);
+    if (!hasError) {
+      onNext();
+    }
+  };
+
+  const handleChangeBool = (field: string, value: string) => {
+    setLocal({ ...local, [field]: value === "true" });
+  };
 
   return (
     <>
@@ -32,8 +55,9 @@ const MaSituation = ({ data, setData, onNext, onBack }: MaSituationProps) => {
             type="text"
             name="employeur"
             value={local.employeur}
-            onChange={(e) => setLocal({ ...local, employeur: e.target.value })}
+            onChange={e => setLocal({ ...local, employeur: e.target.value })}
           />
+          {touched && errors.employeur && <div className="warning-msg">Ce champ est requis.</div>}
         </div>
       </div>
 
@@ -44,8 +68,9 @@ const MaSituation = ({ data, setData, onNext, onBack }: MaSituationProps) => {
             type="number"
             name="revenu"
             value={local.revenu}
-            onChange={(e) => setLocal({ ...local, revenu: e.target.value })}
+            onChange={e => setLocal({ ...local, revenu: e.target.value })}
           />
+          {touched && errors.revenu && <div className="warning-msg">Ce champ est requis.</div>}
         </div>
         <div className="form-group">
           <label>Mensualité des crédits en cours (MAD)</label>
@@ -53,8 +78,9 @@ const MaSituation = ({ data, setData, onNext, onBack }: MaSituationProps) => {
             type="number"
             name="mensualite"
             value={local.mensualite}
-            onChange={(e) => setLocal({ ...local, mensualite: e.target.value })}
+            onChange={e => setLocal({ ...local, mensualite: e.target.value })}
           />
+          {touched && errors.mensualite && <div className="warning-msg">Ce champ est requis.</div>}
         </div>
       </div>
 
@@ -64,16 +90,17 @@ const MaSituation = ({ data, setData, onNext, onBack }: MaSituationProps) => {
           <select
             name="anciennete"
             value={local.anciennete}
-            onChange={(e) => setLocal({ ...local, anciennete: e.target.value })}
+            onChange={e => setLocal({ ...local, anciennete: e.target.value })}
           >
             <option value="">Choisir</option>
             <option value="moins6">Moins de 6 mois</option>
             <option value="6-12">6 à 12 mois</option>
             <option value="plus12">Plus de 12 mois</option>
           </select>
+          {touched && errors.anciennete && <div className="warning-msg">Ce champ est requis.</div>}
         </div>
         <div className="form-group">
-          <label>En période d’essai ?</label>
+          <label>En période d’essai ? *</label>
           <div className="radio-group">
             <label>
               <input
@@ -81,7 +108,7 @@ const MaSituation = ({ data, setData, onNext, onBack }: MaSituationProps) => {
                 name="trialperiod"
                 value="true"
                 checked={local.trialperiod === true}
-                onChange={() => setLocal({ ...local, trialperiod: true })}
+                onChange={e => handleChangeBool('trialperiod', e.target.value)}
               />
               Oui
             </label>
@@ -91,17 +118,18 @@ const MaSituation = ({ data, setData, onNext, onBack }: MaSituationProps) => {
                 name="trialperiod"
                 value="false"
                 checked={local.trialperiod === false}
-                onChange={() => setLocal({ ...local, trialperiod: false })}
+                onChange={e => handleChangeBool('trialperiod', e.target.value)}
               />
               Non
             </label>
           </div>
+          {touched && errors.trialperiod && <div className="warning-msg">Ce champ est requis.</div>}
         </div>
       </div>
 
       <div className="form-section">
         <div className="form-group">
-          <label>Revenus complémentaires ?</label>
+          <label>Revenus complémentaires ? *</label>
           <div className="radio-group">
             <label>
               <input
@@ -109,7 +137,7 @@ const MaSituation = ({ data, setData, onNext, onBack }: MaSituationProps) => {
                 name="revenucompl"
                 value="true"
                 checked={local.revenucompl === true}
-                onChange={() => setLocal({ ...local, revenucompl: true })}
+                onChange={e => handleChangeBool('revenucompl', e.target.value)}
               />
               Oui
             </label>
@@ -119,11 +147,12 @@ const MaSituation = ({ data, setData, onNext, onBack }: MaSituationProps) => {
                 name="revenucompl"
                 value="false"
                 checked={local.revenucompl === false}
-                onChange={() => setLocal({ ...local, revenucompl: false })}
+                onChange={e => handleChangeBool('revenucompl', e.target.value)}
               />
               Non
             </label>
           </div>
+          {touched && errors.revenucompl && <div className="warning-msg">Ce champ est requis.</div>}
         </div>
       </div>
 
@@ -131,10 +160,19 @@ const MaSituation = ({ data, setData, onNext, onBack }: MaSituationProps) => {
         <button type="button" className="back-btn" onClick={onBack}>
           Retour
         </button>
-        <button type="button" className="submit-btn" onClick={onNext}>
+        <button type="button" className="submit-btn" onClick={handleNext}>
           Valider l’étape
         </button>
       </div>
+
+      {/* Style warning rapide */}
+      <style>{`
+        .warning-msg {
+          color: #c40f0f;
+          font-size: 13px;
+          margin-top: 3px;
+        }
+      `}</style>
     </>
   );
 };

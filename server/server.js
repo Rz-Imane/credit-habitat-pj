@@ -13,3 +13,5 @@ app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 const authRoutes = require('./routes/auth');
 app.use('/api/auth', authRoutes);
 
+const propositionRoutes = require('./routes/proposition');
+app.use('/api/proposition', propositionRoutes);

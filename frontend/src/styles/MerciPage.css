@@ -1,0 +1,84 @@
+.merci-bg {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.merci-center-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center; /* centre horizontalement */
+  align-items: center;     /* centre verticalement */
+}
+
+.merci-container {
+  max-width: 560px;
+  background: rgba(255,255,255,0.97);
+  border-radius: 22px;
+  box-shadow: 0 8px 32px #0002;
+  padding: 38px 36px 28px 36px;
+  text-align: center;
+}
+
+/* Zone qui centre la boîte et colle le footer en bas */
+.merci-content-area {
+  flex: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.merci-footer {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  width: 100vw;
+  padding: 14px 0 16px 32px;
+  background: none;
+  color: #1890d5;
+  font-size: 1rem;
+  text-align: left;
+  font-weight: bold;
+  z-index: 5;
+}
+
+
+/* Boutons */
+.merci-btns {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 16px;
+}
+.merci-btn {
+  background: #1890d5;
+  color: #fff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 6px;
+  font-size: 1.04rem;
+  cursor: pointer;
+  transition: background .15s;
+}
+.merci-btn:hover {
+  background: #14679b;
+}
+.merci-title {
+  color: #1890d5;
+  font-weight: bold;
+  font-size: 1.28rem;
+  margin-bottom: 16px;
+}
+.merci-link {
+  color: #2186bb;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .merci-container { padding: 16px 2vw 16px 2vw; }
+  .merci-footer { font-size: 0.93rem; padding-left: 8px;}
+}
