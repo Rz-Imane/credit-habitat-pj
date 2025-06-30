@@ -53,6 +53,12 @@
     font-family: 'Noto Sans', sans-serif;
 }
 
+.pwd-form input::placeholder {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 13px;
+  color: #999;
+}
+
 .pwd-buttons {
     display: flex;
     justify-content: center;

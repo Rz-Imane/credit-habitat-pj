@@ -15,3 +15,10 @@ app.use('/api/auth', authRoutes);
 
 const propositionRoutes = require('./routes/proposition');
 app.use('/api/proposition', propositionRoutes);
+
+const chatbotRoutes = require('./routes/chatbot');
+app.use('/api/chatbot', chatbotRoutes);
+
+const cinRoutes = require('./routes/cin');
+app.use('/api/cin', cinRoutes);
+

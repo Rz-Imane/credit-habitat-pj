@@ -13,13 +13,19 @@ const steps = [
 
 const CreditStepper: React.FC = () => {
   const [step, setStep] = useState<number>(0);
+  const [cinData, setCinData] = useState<any>(null);
 
   const nextStep = () => setStep((prev) => Math.min(prev + 1, steps.length - 1));
   const prevStep = () => setStep((prev) => Math.max(prev - 1, 0));
 
+  const handleNextFromCIN = (data: any) => {
+    setCinData(data); // Sauvegarde pour la suite
+    nextStep();
+  };
+
   const renderStep = () => {
     switch (step) {
-      case 0: return <Step1CIN onNext={nextStep} />;
+      case 0: return <Step1CIN onNext={handleNextFromCIN} />;
       case 1: return <Step2Documents onBack={prevStep} onNext={nextStep} />;
       case 2: return <Step3Medical onBack={prevStep} />;
       default: return null;

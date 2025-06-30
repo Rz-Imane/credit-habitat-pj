@@ -18,14 +18,14 @@ import ThirdHeader from './components/ThirdHeader';
 import SignUp from './components/SignUp';
 import CreditStepper from './components/CreditStepper';
 import CreditSimulator from './components/CreditSimulator';
-import Chatbot from './components/Chatbot';
 import MerciPage from './components/MerciPage';
+import CrispChat from './components/CrispChat';
 
 
 function App() {
   return (
     <Router>
-  
+
       <Routes>
         <Route
           path="/"
@@ -37,7 +37,7 @@ function App() {
               <Onlinecreditsteps />
               <FAQSection />
               <MinimalFooter />
-              <Chatbot />
+              <CrispChat />
             </>
           }
         />
