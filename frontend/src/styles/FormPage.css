@@ -221,3 +221,17 @@ html, body {
   font-size: 12px;
   margin-top: 5px;
 }
+
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+        .warning-msg {
+          color: #c40f0f;
+          font-size: 13px;
+          margin-top: 3px;
+        }

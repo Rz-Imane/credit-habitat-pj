@@ -1,69 +1,67 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import "../styles/creditoffer.css";
 import svg1 from "../assets/frais.svg"; 
 import svg2 from "../assets/checkmark.svg";
 
-
 const CreditOfferSection = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="credit-offer-section">
       <div className="offer-top">
-        <h2>OFFRE EXCLUSIVE EN LIGNE</h2>
+        <h2>{t("offer.exclusiveOnline")}</h2>
         <div className="offer-features">
           <div className="feature-item">
-            <img src={svg1} alt="Frais de dossier" />
+            <img src={svg1} alt={t("offer.dossierFees")} />
             <p>
-              <strong>Frais de dossier</strong>
+              <strong>{t("offer.dossierFees")}</strong>
               <br />
-              Gratuits
+              {t("offer.free")}
             </p>
           </div>
           <div className="feature-item">
-            <img src={svg1} alt="Frais d'expertise" />
+            <img src={svg1} alt={t("offer.expertiseFees")} />
             <p>
-              <strong>Frais d'expertise immobilière</strong>
+              <strong>{t("offer.expertiseFees")}</strong>
               <br />
-              Gratuits
+              {t("offer.free")}
             </p>
           </div>
           <div className="feature-item">
-            <img src={svg1} alt="Accord instantané" />
+            <img src={svg1} alt={t("offer.instantApproval")} />
             <p>
-              <strong>Accord de principe</strong>
+              <strong>{t("offer.instantApproval")}</strong>
               <br />
-              Instantané
+              {t("offer.instant")}
             </p>
           </div>
         </div>
       </div>
 
-
       <div className="offer-options">
-        <h3>
-          Des options de modulation de votre crédit pour s’adapter à vos
-          contraintes
-        </h3>
+        <h3>{t("offer.optionsTitle")}</h3>
         <div className="options-features">
           <div className="option-item">
-            <img src={svg2} alt="Personnalisation" />
+            <img src={svg2} alt={t("offer.paymentDate")} />
             <p>
-              Personnalisation de la date
+              {t("offer.paymentDate")}
               <br />
-              de prélèvement de votre mensualité
+              {t("offer.paymentDateSubtitle")}
             </p>
           </div>
           <div className="option-item">
-            <img src={svg2} alt="Suspension" />
+            <img src={svg2} alt={t("offer.suspension")} />
             <p>
-              Possibilité de suspension du
+              {t("offer.suspension")}
               <br />
-              remboursement d’une mensualité
+              {t("offer.suspensionSubtitle")}
             </p>
           </div>
           <div className="option-item">
-            <img src={svg2} alt="Révision" />
+            <img src={svg2} alt={t("offer.revision")} />
             <p>
-              Révision de vos échéances à la baisse ou à la hausse
+              {t("offer.revision")}
             </p>
           </div>
         </div>

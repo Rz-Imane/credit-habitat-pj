@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/MerciPage.css";
-import bg from "../assets/salon.jpg"; // change le chemin selon ton image
+import bg from "../assets/salon.jpg"; 
+import MinimalFooter from "./MinimalFooter";
 
 const MerciPage: React.FC = () => {
   const navigate = useNavigate();
@@ -43,6 +44,7 @@ const MerciPage: React.FC = () => {
         </div>
       </div>
       </div>
+      <MinimalFooter />
     </div>
   );
 };

@@ -1,0 +1,103 @@
+{
+  "headline": "BANK OF AFRICA covers your registration fees for any loan of 10 years or more, until May 10 – up to 30,000 Dhs offered!",
+  "simulateCredit": "Simulate my loan",
+  "startRequest": "Start my application",
+  "simulator": "Simulator",
+  "myRequest": "My Application",
+  "offer": {
+    "exclusiveOnline": "EXCLUSIVE ONLINE OFFER",
+    "dossierFees": "Application fees",
+    "free": "Free",
+    "expertiseFees": "Property appraisal fees",
+    "instantApproval": "Pre-approval",
+    "instant": "Instant",
+    "optionsTitle": "Flexible loan options to suit your needs",
+    "paymentDate": "Customize your payment date",
+    "paymentDateSubtitle": "for your monthly installment",
+    "suspension": "Possibility to suspend",
+    "suspensionSubtitle": "one monthly repayment",
+    "revision": "Revise your repayments up or down"
+  }
+,
+  "stepsTitle": "Your online home loan in 5 steps",
+  "stepsSubtitle": "No need to visit the branch multiple times.<br />Choose online home loan and make your life easier.",
+  "steps": [
+    {
+      "title": "Form",
+      "description": "I enter the information about my profile and project"
+    },
+    {
+      "title": "Commercial offer",
+      "description": "I get an instant pre-approval with a personalized simulation"
+    },
+    {
+      "title": "Credit file",
+      "description": "I send my supporting documents via my personal space"
+    },
+    {
+      "title": "Contract signing",
+      "description": "I receive my contract to be legalized"
+    },
+    {
+      "title": "Branch appointment",
+      "description": "I go to the branch with my originals and the legalized contract"
+    }
+  ],
+  "faqTitle": "Frequently Asked Questions",
+  "faq": [
+    {
+      "question": "Why apply for an online mortgage with BANK OF AFRICA?",
+      "answer": "Our online mortgage gives you the best rates, fast processing, and all steps can be done online except contract signing. Benefits: free application fees, free appraisal fees (if required), instant approval, personalized simulation, exclusive online offer, custom payment date, online tracking, and daily support from 8am to 8pm."
+    },
+    {
+      "question": "What is a capped variable-rate mortgage?",
+      "answer": "A variable rate lets you benefit from lower rates while keeping a maximum limit. The rate is revised every year on the loan anniversary and follows the limits shown when you take the loan."
+    },
+    {
+      "question": "What are the advantages of a capped variable-rate mortgage?",
+      "answer": "You get a lower starting monthly payment and can borrow more, save on costs, and switch to a fixed rate once during your loan if you want. The variable rate is often lower than a fixed rate, even if it increases."
+    },
+    {
+      "question": "How do you pay for loan insurance (death/disability)?",
+      "answer": "You can pay your insurance all at once, split over the year, or include it in the loan amount."
+    },
+    {
+      "question": "What is periodic insurance?",
+      "answer": "This insurance requires you to make regular (annual) payments for a set amount and duration."
+    },
+    {
+      "question": "What is a single-premium insurance?",
+      "answer": "You pay for your life insurance in a single payment at the time of contract."
+    },
+    {
+      "question": "Do I need to go to the branch for my mortgage application?",
+      "answer": "You can complete your application fully online, except for presenting your original documents and signed contract at the branch. You can also contact our advisors daily from 8am to 8pm."
+    },
+    {
+      "question": "How can I apply for a mortgage online with BANK OF AFRICA?",
+      "answer": "1. Create your account with your email. 2. Fill the form for instant approval. 3. Upload your documents and fill the medical form. 4. Receive your contract by email. 5. Go to the branch with your original documents and signed contract."
+    },
+    {
+      "question": "Who can apply online? Do I need to be a BANK OF AFRICA client?",
+      "answer": "Anyone can apply, whether a client or not, resident or non-resident, individual or professional. If you get approval, you will need to open a BANK OF AFRICA account to complete your process."
+    },
+    {
+      "question": "Is the approval final?",
+      "answer": "The approval is based on your information. It's subject to checking your documents and eligibility (such as no payment incidents)."
+    },
+    {
+      "question": "What projects can I finance with the online mortgage?",
+      "answer": "You can finance a home purchase, land + construction, construction on owned land, expansion (for MRE clients in some cases), or buy out an existing mortgage."
+    },
+    {
+      "question": "Can I apply with my spouse?",
+      "answer": "Yes, you can apply alone or with your spouse. You can apply together with total income, or separately with each share. Our advisors will help coordinate your applications."
+    },
+    {
+      "question": "How can I get more information?",
+      "answer": "Contact our Direct Agency daily from 8am to 8pm at +212 (0) 5 20 39 30 30, or fill out the contact form and an advisor will reply as soon as possible."
+    }
+  ],
+  "footer": "© {{year}} BANK OF AFRICA. All rights reserved."
+
+}

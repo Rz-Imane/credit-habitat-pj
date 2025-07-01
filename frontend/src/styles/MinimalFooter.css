@@ -5,10 +5,23 @@
     font-family: 'Arial', sans-serif;
     font-size: 0.9rem;
     color: white;
-    border-top: 1px solid #e0e0e0;
   }
   
   .minimal-footer p {
     margin: 0;
   }
 
+.minimal-footer {
+  width: 100%;
+  margin: 0;
+  border: none;
+  box-shadow: none;
+  border-top: none;          /* Explicitly remove border */
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  background: #f7f7f7;       /* Or whatever your main bg is */
+  border: none;
+}

@@ -1,35 +1,35 @@
-// src/components/CreditConfirmationCard.tsx
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../styles/CreditConfirmationCard.css';
 import bgform from '../assets/bgform.png';
+import MinimalFooter from './MinimalFooter';
 
 const CreditConfirmationCard: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const formData = location.state;
 
-  // Si l’utilisateur arrive sans données, retourne au formulaire
   React.useEffect(() => {
     if (!formData) {
       navigate('/form');
     }
   }, [formData, navigate]);
 
-  if (!formData) return null; // Empêche l’affichage si pas de données
+  if (!formData) return null;
 
-  // Utilitaire pour naviguer directement à l’étape voulue du formulaire
   const goToStep = (stepNumber: number) => {
     navigate('/form', { state: { ...formData, step: stepNumber } });
   };
 
   return (
-    <div className="page-wrapper" style={{ backgroundImage: `url(${bgform})` }}>
+    <div
+      className="page-wrapper"
+      style={{ backgroundImage: `url(${bgform})` }}
+    >
       <div className="card-container">
         <div className="credit__card">
           <h2>Mon récapitulatif</h2>
           <p>Finalisez votre inscription en confirmant vos données</p>
-
           <div className="credit-card__section">
             <div className="credit-card__section-header">
               Mon projet{' '}
@@ -120,6 +120,7 @@ const CreditConfirmationCard: React.FC = () => {
           Refaire ma simulation
         </button>
       </div>
+      <MinimalFooter />
     </div>
   );
 };

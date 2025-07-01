@@ -9,9 +9,10 @@ type MonProfilProps = {
 
 const MonProfil = ({ data, setData, onNext }: MonProfilProps) => {
   const [touched, setTouched] = React.useState(false);
+  const [acceptTerms, setAcceptTerms] = React.useState(false);
+  const [acceptOffers, setAcceptOffers] = React.useState(false);
 
   const handleChange = (field: string, value: any) => {
-    // Corrige les booléens pour isclient et coemprunt
     if (field === "isclient" || field === "coemprunt") {
       value = value === "true" ? true : value === "false" ? false : value;
     }
@@ -21,7 +22,6 @@ const MonProfil = ({ data, setData, onNext }: MonProfilProps) => {
     }));
   };
 
-  // Validation :
   const errors = {
     civilite: !data.civilite,
     prenom: !data.prenom,
@@ -34,11 +34,18 @@ const MonProfil = ({ data, setData, onNext }: MonProfilProps) => {
     activite_professionnelle: data.categorie_client === 'professionnel' && !data.activite_professionnelle,
     coemprunt: typeof data.coemprunt !== 'boolean',
   };
-  const hasError = Object.values(errors).some(Boolean);
+  // Must accept terms
+  const hasError = Object.values(errors).some(Boolean) || !acceptTerms;
 
   const handleNext = () => {
     setTouched(true);
     if (!hasError) {
+      // Optionally, include checkboxes in form data
+      setData((prev: any) => ({
+        ...prev,
+        acceptTerms,
+        acceptOffers,
+      }));
       onNext();
     }
   };
@@ -152,20 +159,39 @@ const MonProfil = ({ data, setData, onNext }: MonProfilProps) => {
         </div>
       </div>
 
+      {/* --- Terms and Conditions Section --- */}
+      <div className="form-section">
+        <div className="checkbox-group">
+          <label>
+            <input
+              type="checkbox"
+              checked={acceptTerms}
+              onChange={e => setAcceptTerms(e.target.checked)}
+              required
+            />
+            J’ai lu et j’accepte les termes de conditions d’utilisation
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={acceptOffers}
+              onChange={e => setAcceptOffers(e.target.checked)}
+            />
+            J’accepte de recevoir les offres professionnelles de BANK OF AFRICA
+          </label>
+        </div>
+        {touched && !acceptTerms && (
+          <div className="warning-msg" style={{marginTop: '8px'}}>
+            Vous devez accepter les termes de conditions d’utilisation.
+          </div>
+        )}
+      </div>
+
       <div className="submit-section">
         <button type="button" className="submit-btn" onClick={handleNext}>
           Valider l’étape
         </button>
       </div>
-
-      {/* Style warning local rapide */}
-      <style>{`
-        .warning-msg {
-          color: #c40f0f;
-          font-size: 13px;
-          margin-top: 3px;
-        }
-      `}</style>
     </>
   );
 };

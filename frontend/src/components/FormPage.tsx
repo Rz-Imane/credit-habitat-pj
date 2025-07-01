@@ -6,6 +6,7 @@ import PersonnaliserCredit from '../components/PersonnaliserCredit';
 import bgform from "../assets/bgform.png";
 import '../styles/FormPage.css';
 import { useNavigate, useLocation } from 'react-router-dom';
+import MinimalFooter from './MinimalFooter';
 
 type FormData = {
   id?: number;
@@ -236,6 +237,7 @@ const FormPage: React.FC = () => {
           {renderStep()}
         </main>
       </div>
+      <MinimalFooter />
     </div>
   );
 };

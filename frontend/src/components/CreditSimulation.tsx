@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../styles/CreditSimulation.css';
 import bg3 from "../assets/bg3.png";
+import MinimalFooter from './MinimalFooter';
 
 // Fonction pour calculer les frais de notaire au Maroc
 function calcFraisNotaire(valeurBienRaw: any) {
@@ -38,9 +39,7 @@ const CreditSimulation: React.FC = () => {
     : 0;
 
   const handleDownload = async () => {
-    // On construit un payload qui inclut l'assurance
     const payload = { ...formData, assurance: insurance };
-    console.log("Data envoyée pour PDF :", payload);
     const res = await fetch('/api/proposition/pdf', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -64,10 +63,10 @@ const CreditSimulation: React.FC = () => {
 
   // Exemple de calculs (remplace par les vrais formules si besoin)
   const totalInterest = formData.montant && formData.duree && formData.taux
-    ? Math.round(Number(formData.montant) * Number(formData.duree) * 0.04) // exemple
+    ? Math.round(Number(formData.montant) * Number(formData.duree) * 0.04)
     : "---";
   const monthlyAmount = formData.mensualite || "---";
-  const teg = "5.32%"; // valeur exemple
+  const teg = "5.32%";
   const totalWithInsurance = formData.montant && insurance !== 0
     ? Number(formData.montant) + Number(insurance)
     : "---";
@@ -75,69 +74,74 @@ const CreditSimulation: React.FC = () => {
 
   return (
     <div className="credit-simulation" style={{ backgroundImage: `url(${bg3})` }}>
-      <div className="credit-header">
-        <p className="title">Félicitations !</p>
-        <p className="subtitle">Votre prêt immobilier est pré-approuvé.</p>
-      </div>
-
-      <div className="credit-cards">
-        {/* Carte gauche : infos crédit */}
-        <div className="credit-card left-card">
-          <h2 className="section-title">Votre mensualité TTC</h2>
-          <p className="monthly-amount">{monthlyAmount} Dhs / Mois</p>
-          <p className="duration">Durée : {formData.duree || "---"} mois</p>
-
-          <button className="btn download-btn" onClick={handleDownload}>Téléchargez proposition de crédit</button>
-
-          <div className="info-box">
-            <p>Montant crédit demandé : {formData.montant} Dhs</p>
-            <p>Total intérêts : {totalInterest} Dhs</p>
-            <p>Assurances : {insurance} Dhs</p>
-            <p>Taux du crédit : {formData.taux}</p>
-            <p>TEG : {teg}</p>
-            <p>Montant crédit total (avec assurance) : {totalWithInsurance} Dhs</p>
-            <p>Coût total du crédit : {formData.valeur_du_bien} Dhs</p>
-          </div>
-
-          <div className="additional-info">
-            <p>Expertise immobilière : <strong>GRATUIT</strong></p>
-            <p>Frais de dossier : <strong>GRATUIT</strong></p>
-            <p>Date de prélèvement de l’échéance : {formData.jourrelev}</p>
-          </div>
-
-          <button className="btn simulation-btn" onClick={() => navigate("/form")}>
-            Refaire ma simulation
-          </button>
+      <div className="footer-push">
+        <div className="credit-header">
+          <p className="title">Félicitations !</p>
+          <p className="subtitle">Votre prêt immobilier est pré-approuvé.</p>
         </div>
 
-        {/* Carte droite : frais de notaire */}
-        <div className="credit-card right-card">
-          <h2 className="section-title">Frais de Notaire</h2>
-          <div className="info-box">
-            <p>Frais de notaire (honoraires) : {frais.honoraires} Dhs</p>
-            <p>Droits d’enregistrement : {frais.droitsEnregistrement} Dhs</p>
-            <p>Frais de conservation foncière : {frais.conservationFonc} Dhs</p>
-            <p>Timbre fiscal : {frais.timbre} Dhs</p>
-            <p>Frais de rédaction d’acte : {frais.redactionActe} Dhs</p>
-            <p>Certificats de propriété : {frais.certificats} Dhs</p>
-            <p>Frais divers : {frais.divers} Dhs</p>
-            <hr style={{ margin: "8px 0" }} />
-            <p style={{ fontWeight: 'bold', fontSize: 17 }}>
-              Total estimé : {frais.total} Dhs
-            </p>
+        <div className="credit-cards">
+          {/* Carte gauche : infos crédit */}
+          <div className="credit-card left-card">
+            <h2 className="section-title">Votre mensualité TTC</h2>
+            <p className="monthly-amount">{monthlyAmount} Dhs / Mois</p>
+            <p className="duration">Durée : {formData.duree || "---"} mois</p>
+
+            <button className="btn download-btn" onClick={handleDownload}>
+              Téléchargez proposition de crédit
+            </button>
+
+            <div className="info-box">
+              <p>Montant crédit demandé : {formData.montant} Dhs</p>
+              <p>Total intérêts : {totalInterest} Dhs</p>
+              <p>Assurances : {insurance} Dhs</p>
+              <p>Taux du crédit : {formData.taux}</p>
+              <p>TEG : {teg}</p>
+              <p>Montant crédit total (avec assurance) : {totalWithInsurance} Dhs</p>
+              <p>Coût total du crédit : {formData.valeur_du_bien} Dhs</p>
+            </div>
+
+            <div className="additional-info">
+              <p>Expertise immobilière : <strong>GRATUIT</strong></p>
+              <p>Frais de dossier : <strong>GRATUIT</strong></p>
+              <p>Date de prélèvement de l’échéance : {formData.jourrelev}</p>
+            </div>
+
+            <button className="btn simulation-btn" onClick={() => navigate("/form")}>
+              Refaire ma simulation
+            </button>
           </div>
-          <div className="disclaimer">
-            <p>*Estimation à titre indicatif – les montants varient selon la nature du bien et la ville.</p>
-            <p><strong>Offre non contractuelle</strong></p>
-            <p>
-              Cette offre est valable sous réserve d’une même situation financière sur les 30 prochains jours.
-              En cas d’évolution, un ajustement de l’offre pourra être nécessaire.
-              Les montants indiqués sont à titre indicatif.
-            </p>
+
+          {/* Carte droite : frais de notaire */}
+          <div className="credit-card right-card">
+            <h2 className="section-title">Frais de Notaire</h2>
+            <div className="info-box">
+              <p>Frais de notaire (honoraires) : {frais.honoraires} Dhs</p>
+              <p>Droits d’enregistrement : {frais.droitsEnregistrement} Dhs</p>
+              <p>Frais de conservation foncière : {frais.conservationFonc} Dhs</p>
+              <p>Timbre fiscal : {frais.timbre} Dhs</p>
+              <p>Frais de rédaction d’acte : {frais.redactionActe} Dhs</p>
+              <p>Certificats de propriété : {frais.certificats} Dhs</p>
+              <p>Frais divers : {frais.divers} Dhs</p>
+              <hr style={{ margin: "8px 0" }} />
+              <p style={{ fontWeight: 'bold', fontSize: 17 }}>
+                Total estimé : {frais.total} Dhs
+              </p>
+            </div>
+            <div className="disclaimer">
+              <p>*Estimation à titre indicatif – les montants varient selon la nature du bien et la ville.</p>
+              <p><strong>Offre non contractuelle</strong></p>
+              <p>
+                Cette offre est valable sous réserve d’une même situation financière sur les 30 prochains jours.
+                En cas d’évolution, un ajustement de l’offre pourra être nécessaire.
+                Les montants indiqués sont à titre indicatif.
+              </p>
+            </div>
+            <button className="btn primary-btn" onClick={() => navigate("/merci")}>Souscrire à l’offre</button>
           </div>
-          <button className="btn primary-btn" onClick={() => navigate("/merci")}>Souscrire à l’offre</button>
         </div>
       </div>
+      <MinimalFooter />
     </div>
   );
 };
